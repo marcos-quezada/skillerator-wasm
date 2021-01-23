@@ -1,0 +1,74 @@
+@page "/todorequest"
+@using System.Net.Http
+@using System.Net.Http.Headers
+@using System.Net.Http.Json
+@using System.Text.Json
+@inject HttpClient Http
+
+<h1>ToDo Request</h1>
+
+<button @onclick="PostRequest">Submit request</button>
+
+@if (locationItems == null)
+{
+    <p>No Location Items found.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="text-center">Complete</th>
+                <th>Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in locationItems)
+            {
+                <tr>
+                    <td>@item.id</td>
+                    <td>@item.typ</td>
+                    <td>@item.amtsbezeichnung</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<p>Response body returned by the server:</p>
+
+<p>@responseBody</p>
+
+@code {
+    private const string SERVICE_ENDPOINT = "https://bamf-navi.bamf.de/atlas-backend/behoerden/abh";
+    private LocationItem[] locationItems;
+
+    private string responseBody;
+
+    private async Task PostRequest()
+    {
+        var requestMessage = new HttpRequestMessage()
+        {
+            Method = new HttpMethod("GET"),
+            RequestUri = new Uri(SERVICE_ENDPOINT)
+        };
+
+        requestMessage.Headers.Add("Accept-Encoding", "gzip, deflate, br");
+        requestMessage.Headers.Add("Connection", "keep-alive");
+        requestMessage.Headers.Add("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.34 (KHTML, like Gecko) Qt/4.8.2");
+
+        var response = await Http.SendAsync(requestMessage);
+        var responseStatusCode = response.StatusCode;
+
+        responseBody = await response.Content.ReadAsStringAsync();
+        locationItems = System.Text.Json.JsonSerializer.Deserialize<LocationItem[]>(responseBody);
+    }
+
+    public class LocationItem
+    {
+        public int id { get; set; }
+        public string typ { get; set; }
+        public string amtsbezeichnung { get; set; }
+    }
+}
