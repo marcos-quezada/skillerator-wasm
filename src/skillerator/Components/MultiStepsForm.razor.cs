@@ -33,7 +33,7 @@ namespace skillerator.Components{
         private FluentValidationValidator fluentValidationValidator;
 
         private AuslaenderbehoerdeData AuslaenderbehoerdeItem {get; set;}
-        private const string GEO_DATA_SERVICE_ENDPOINT = "http://overpass-api.de/api/interpreter";
+        private const string GEO_DATA_SERVICE_ENDPOINT = "https://overpass-api.de/api/interpreter";
         private const string BEHOERDEN_SERVICE_ENDPOINT = "https://bamf-navi.bamf.de/atlas-backend/behoerden/zustaendigkeiten";
 
         [CascadingParameter] protected internal Dictionary<long, AuslaenderbehoerdeData> AuslaenderbehoerdeDictionary{get; set;}
