@@ -1,0 +1,67 @@
+@inherits BaseComponent;
+@page "/brexit"
+@page "/brexit/{action}"
+@using skillerator.Components
+
+<CascadingValue Value="this.AuslaenderbehoerdeDictionary">
+    @switch (Action ?? String.Empty)
+    {
+        case "":
+        case "intro":
+            <div>
+                <SemGrid Columns="GridUnit.One" Classes="@(new [] {GridClass.Centered})">
+                    <SemGridRow Columns="GridUnit.Two">
+                        <SemGridColumn Classes="@(new[] { ColumnClass.Center_Aligned })">
+                            <h3>Are you a UK national living in Germany?</h3>
+                            <p style="text-align: justify;text-justify: inter-word;">
+                                UK nationals living in Germany on 31 December 2020 and continuing to live in Germany must report their residence to the foreigners authority by 
+                                30 June 2021 in order to be able to obtain the new residence document.
+                            </p>
+                            <p>
+                                Check if you need to apply for a residence status and where to get one.
+                            </p>
+                            <SemButton Color="ButtonColor.Blue" Size="Size.Big" OnClick="@(() => GoToAction("elegibility"))">
+                                Get residence document
+                            </SemButton>
+                        </SemGridColumn>
+                    </SemGridRow>
+                </SemGrid>
+            </div>
+            break;
+        case "elegibility":
+            <div>
+                <SemGrid Columns="GridUnit.One" Classes="@(new [] {GridClass.Centered})">
+                    <SemGridRow Columns="GridUnit.Two">
+                        <SemGridColumn Classes="@(new[] { ColumnClass.Center_Aligned })">
+                            <p><b>Did you live in Germany on 31.12.2020?</b></p>
+                            <p>Lebten Sie am 31.12.2020 in Deutschland?</p>
+                        </SemGridColumn>
+                    </SemGridRow>
+                    <SemGridRow Columns="GridUnit.Three">
+                        <SemGridColumn Classes="@(new[] { ColumnClass.Center_Aligned })">
+                            <SemButton Color="ButtonColor.Blue" Size="Size.Big" OnClick="@(() => GoToAction("apply"))"
+                                Classes="@(new[] { ButtonClass.Fluid})">
+                                Yes
+                            </SemButton>
+                        </SemGridColumn>
+                        <SemGridColumn Classes="@(new[] { ColumnClass.Center_Aligned })">
+                            <SemButton Color="ButtonColor.Blue" Size="Size.Big" Emphasis="Emphasis.Primary" 
+                                Classes="@(new[] { ButtonClass.Basic, ButtonClass.Fluid})" OnClick="@(() => GoToAction("search"))">
+                                No
+                            </SemButton>
+                        </SemGridColumn>
+                    </SemGridRow>
+                </SemGrid>
+            </div>
+            break;
+        case "search":
+            <p>Search page...</p>
+            break;
+        case "apply":
+            <BrexitToolComponent/>
+            break;
+        default:
+            <p>Action @Action not defined.</p>
+            break;
+    }
+</CascadingValue>

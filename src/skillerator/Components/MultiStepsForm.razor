@@ -1,0 +1,52 @@
+<CascadingValue Value="this">
+    @if (ActiveStepIx > 0){
+        <div id="@Id">
+            <ul class="nav nav-pills nav-justified">
+                @foreach (var step in Cards.Skip(1))
+                {
+                    <li id="step-@(StepsIndex(step) + 1)" class="nav-item">
+                        <a class="nav-link @((ActiveStep == step) ? "active" : "")" href="javascript: void(0)" 
+                        @onclick="@(e=> SetActive(step))">@step.Name</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+
+    <SemForm Model="userInfo" OnValidSubmit="SubmitValidForm" FormValidationPosition="ValidationPosition.Hidden" FieldValidationPosition="ValidationPosition.Hidden">
+    
+        <FluentValidationValidator @ref="fluentValidationValidator" />
+        <!--<ValidationSummary /> -->
+
+        <div id="container-fluid">
+            @ChildContent
+        </div>
+
+        <SemGrid Columns="GridUnit.One" Classes="@(new [] {GridClass.Centered})">
+            <SemGridRow Columns="GridUnit.Two">
+                <SemGridColumn Classes="@(new[] { ColumnClass.Center_Aligned })">
+                    <SemButton Color="ButtonColor.Blue" Enabled="@(ActiveStepIx > 0)" Emphasis="Emphasis.Primary" 
+                        Classes="@(new[] { ButtonClass.Basic, ButtonClass.Fluid })" Size="Size.Big" OnClick="@(GoBack)">
+                            @(ActiveStepIx == 0 ? "No Previous Step" : Cards[ActiveStepIx - 1].Name)
+                    </SemButton>
+                </SemGridColumn>
+                @if(IsLastStep){
+                    <SemGridColumn Classes="@(new[] { ColumnClass.Center_Aligned })">
+                    <SemButton Color="ButtonColor.Blue" Size="Size.Big" IsSubmitButton="true" OnClick="@(SubmitValidForm)"
+                        Classes="@(new[] { ButtonClass.Fluid })">
+                            Submit
+                    </SemButton>
+                </SemGridColumn>
+                }else
+                {
+                    <SemGridColumn Classes="@(new[] { ColumnClass.Center_Aligned })">
+                        <SemButton Color="ButtonColor.Blue" Size="Size.Big" OnClick="@(GoNext)" 
+                            Classes="@(new[] { ButtonClass.Fluid })">
+                                @(Cards[ActiveStepIx + 1].Name)
+                        </SemButton>
+                    </SemGridColumn>        
+                }
+            </SemGridRow>
+        </SemGrid>
+    </SemForm>
+</CascadingValue>
