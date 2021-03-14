@@ -88,7 +88,7 @@ namespace skillerator.Components{
             var json = JsonSerializer.Serialize(template);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var url = $"http://api.skillerator.de/project/{userInfo.ProjectUUID}/compile";
+            var url = $"https://api.skillerator.de/project/{userInfo.ProjectUUID}/compile";
             
             var response = await Http.PostAsync(url, data);
 
