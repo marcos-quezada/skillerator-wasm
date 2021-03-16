@@ -12,7 +12,7 @@ namespace skillerator.Pages{
 
         [Inject] protected NavigationManager NavigationManager {get; set;}
         [Inject] protected HttpClient Http {get; set;}
-        private const string SERVICE_ENDPOINT = "https://bamf-navi.bamf.de/atlas-backend/behoerden/abh";
+        private const string SERVICE_ENDPOINT = "https://proxy.skillerator.de/api/bamf-abh";
 
         public Dictionary<long, AuslaenderbehoerdeData> AuslaenderbehoerdeDictionary = new Dictionary<long, AuslaenderbehoerdeData>();
 
