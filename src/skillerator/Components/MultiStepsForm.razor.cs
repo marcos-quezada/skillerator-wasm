@@ -35,6 +35,7 @@ namespace skillerator.Components{
         private AuslaenderbehoerdeData AuslaenderbehoerdeItem {get; set;}
         private const string GEO_DATA_SERVICE_ENDPOINT = "https://overpass-api.de/api/interpreter";
         private const string BEHOERDEN_SERVICE_ENDPOINT = "https://bamf-navi.bamf.de/atlas-backend/behoerden/zustaendigkeiten";
+        private const string DOWNLOAD_LINK_TEMPLATE = "http://api.skillerator.de/project/{0}/build/{1}/output/output.pdf";
 
         [CascadingParameter] protected internal Dictionary<long, AuslaenderbehoerdeData> AuslaenderbehoerdeDictionary{get; set;}
         bool PartialValidate(string RuleSetsName)
@@ -62,9 +63,41 @@ namespace skillerator.Components{
 
         void SubmitValidForm()
         {   
+            
             Console.WriteLine($"PDF Creation result : {GeneratePDF()}");
             Console.WriteLine("Form Submitted Successfully!");
         }
+
+        protected internal async Task SendEmail(){
+            string PDFCreationResult = await GeneratePDF();
+            EmailContentData EmailData = new EmailContentData();
+
+            JsonDocument PDFCreationResultJsonDocument = JsonDocument.Parse(PDFCreationResult);
+            JsonElement Root = PDFCreationResultJsonDocument.RootElement;
+            Root.TryGetProperty("compile", out JsonElement CompileElement);
+            
+            string MainEmailTemplate = await Http.GetStringAsync("templates/brexit_email_template.html");
+            EmailData.body = string.Format(MainEmailTemplate, "","");            
+
+            /*Resource[] resources = new Resource[]{
+                new Resource("vars.tex", CreateVarsLatexString()),
+                new Resource("main.tex", MainLatexTemplate)
+            };
+            Options options = new Options("pdflatex", 40);
+            CompileElement compile = new CompileElement( options, resources);
+            BrexitLatexTemplate template = new BrexitLatexTemplate(compile);
+
+            var json = JsonSerializer.Serialize(template);
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var url = $"https://api.skillerator.de/project/{userInfo.ProjectUUID}/compile";
+            
+            var response = await Http.PostAsync(url, data);
+
+            string result = response.Content.ReadAsStringAsync().Result;
+            Console.WriteLine(result);
+            return result;*/
+        } 
 
         protected internal string CreateVarsLatexString(){
             return "\\newcommand{\\AuslanderbehoerdeDescription}{" + AuslaenderbehoerdeItem.Amtsbezeichnung + " " + AuslaenderbehoerdeItem.Bezeichnung 

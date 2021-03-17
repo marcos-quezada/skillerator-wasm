@@ -1,7 +1,13 @@
 ﻿@page "/"
 
-<h1>Hello, Skillerator!</h1>
-
-Welcome to the Skillerator® app.
-
-<SurveyPrompt Title="How is Blazor working for you?" />
+<SemGrid Columns="GridUnit.One" Classes="@(new [] {GridClass.Centered})">
+  <SemGridColumn Classes="@(new[] { ColumnClass.Center_Aligned })">
+      <img src="logo_skillerator_bildmarke.svg" class="responsive"/>
+  </SemGridColumn>
+  <SemGridColumn Classes="@(new[] { ColumnClass.Center_Aligned })">
+      <SemDivider></SemDivider>
+  </SemGridColumn>
+  <SemGridColumn Classes="@(new[] { ColumnClass.Center_Aligned })">
+      <h2>Coming Soon</h2>
+  </SemGridColumn>
+</SemGrid>
