@@ -34,7 +34,7 @@ namespace skillerator.Components{
 
         private AuslaenderbehoerdeData AuslaenderbehoerdeItem {get; set;}
         private const string GEO_DATA_SERVICE_ENDPOINT = "https://overpass-api.de/api/interpreter";
-        private const string EMAIL_SERVICE_ENDPOINT = "https://proxy.skillerator.de:5001/api/send-email";
+        private const string EMAIL_SERVICE_ENDPOINT = "https://proxy.skillerator.de/api/send-email";
         private const string BEHOERDEN_SERVICE_ENDPOINT = "https://bamf-navi.bamf.de/atlas-backend/behoerden/zustaendigkeiten";
         private const string DOWNLOAD_LINK_TEMPLATE = "http://api.skillerator.de/project/{0}/build/{1}/output/output.pdf";
 
