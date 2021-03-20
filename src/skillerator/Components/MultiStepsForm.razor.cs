@@ -30,6 +30,7 @@ namespace skillerator.Components{
 
         public BrexitInfo userInfo {get; set;}= new BrexitInfo();
         [Inject] protected HttpClient Http {get; set;}
+        [Inject] protected NavigationManager NavigationManager {get; set;}
         private FluentValidationValidator fluentValidationValidator;
 
         private AuslaenderbehoerdeData AuslaenderbehoerdeItem {get; set;}
@@ -64,9 +65,9 @@ namespace skillerator.Components{
 
         async Task SubmitValidForm()
         {   
-            
             await SendEmail();
             Console.WriteLine("Form Submitted Successfully!");
+            NavigationManager.NavigateTo($"/brexit/sucess");
         }
 
         protected internal async Task SendEmail(){
@@ -81,7 +82,7 @@ namespace skillerator.Components{
             string DownloadLink = string.Format(DOWNLOAD_LINK_TEMPLATE, userInfo.ProjectUUID, BuildElement.GetString());
 
             string MainEmailTemplate = await Http.GetStringAsync("templates/brexit_email_template.html");
-            EmailContentData EmailData = new EmailContentData("quezad@gmail.com", "Document generated", string.Format(MainEmailTemplate, DownloadLink));
+            EmailContentData EmailData = new EmailContentData(userInfo.Email, "Document generated", string.Format(MainEmailTemplate, DownloadLink, DownloadLink));
 
             var json = JsonSerializer.Serialize(EmailData);
             var data = new StringContent(json, Encoding.UTF8, "application/json");   
