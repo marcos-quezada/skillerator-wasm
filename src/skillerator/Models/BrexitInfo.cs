@@ -35,6 +35,7 @@ namespace skillerator.Models{
         [Display(Name = "Hausnummer")] public string Number{get; set;} 
         [Display(Name = "PLZ")] public int ZipCode{get; set;} 
         [Display(Name = "Stadt")] public string City{get; set;}
+        [Display(Name = "E-Mail Adresse")] public string Email{get; set;}
         protected internal string ProjectUUID = Guid.NewGuid().ToString();
 
     }
@@ -68,6 +69,10 @@ namespace skillerator.Models{
 
                 RuleFor(bInfo => bInfo.City)
                 .NotEmpty().WithMessage("You must enter the city");
+
+                RuleFor(bInfo => bInfo.Email)
+                .NotEmpty().WithMessage("You must enter an email address")
+                .EmailAddress().WithMessage("A valid email address is required");
             });
         }
     }

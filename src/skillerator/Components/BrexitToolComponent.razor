@@ -1,56 +1,73 @@
 <MultiStepsForm @ref="ParentForm" Id="BrexitToolForm">
     <MultiStepsFormCard Name="Nature of application">
-        <div>
-            <SemGrid Columns="GridUnit.One" Classes="@(new [] {GridClass.Centered})">
-                <SemGridRow Columns="GridUnit.Two">
-                    <SemGridColumn Classes="@(new[] { ColumnClass.Center_Aligned })">
-                        <p style="font-size: 1.28571429rem;">What do you want to apply for?</p>
-                    </SemGridColumn>
-                </SemGridRow>
+        <SemGrid Classes="@(new [] {GridClass.Centered})">
+            <SemGridRow>
+                <SemGridColumn Classes="@(new[] { ColumnClass.Center_Aligned })">
+                    <p style="font-size: 1.28571429rem;">What do you want to apply for?</p>
+                </SemGridColumn>
+            </SemGridRow>
 
-                <SemGridRow Columns="GridUnit.Two">
-                    <SemGridColumn Classes="@(new[] { ColumnClass.Left_Aligned })">
-                        <SemFormField For="@(() => ParentForm.userInfo.isRegistration)">
-                            <SemCheckbox @bind-Value="ParentForm.userInfo.isRegistration" Label="Registration of UK citizens at the Foreigners Office"></SemCheckbox>
-                        </SemFormField>
-                        <SemFormField For="@(() => ParentForm.userInfo.isCertificate)">
-                            <SemCheckbox @bind-Value="ParentForm.userInfo.isCertificate" Label="Application for a fictional certificate for UK citizens"></SemCheckbox>
-                        </SemFormField>
-                    </SemGridColumn>
-                </SemGridRow>
-            </SemGrid>
-        </div>
+            <SemGridRow>
+                <SemGridColumn Wide="GridUnit.Three"></SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Ten" Classes="@(new[] { ColumnClass.Left_Aligned })">
+                    <SemFormField For="@(() => ParentForm.userInfo.isRegistration)">
+                        <SemCheckbox @bind-Value="ParentForm.userInfo.isRegistration" Label="Registration of UK citizens at the Foreigners Office"></SemCheckbox>
+                    </SemFormField>
+                    <SemFormField For="@(() => ParentForm.userInfo.isCertificate)">
+                        <SemCheckbox @bind-Value="ParentForm.userInfo.isCertificate" Label="Application for a fictional certificate for UK citizens"></SemCheckbox>
+                    </SemFormField>
+                </SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Three"></SemGridColumn>
+            </SemGridRow>
+        </SemGrid>
     </MultiStepsFormCard>
     <MultiStepsFormCard Name="Personal details" ValidationGroup="personal">
-        <SemGrid Columns="GridUnit.One" Classes="@(new [] {GridClass.Centered})">
-            <SemGridRow Columns="GridUnit.Two">
+        <SemGrid Classes="@(new [] {GridClass.Centered})">
+            <SemGridRow>
                 <SemGridColumn Classes="@(new[] { ColumnClass.Center_Aligned })">
                     <p>Personal data</p>
                     <p>Persönliche Angaben</p>
                 </SemGridColumn>
             </SemGridRow>
-            <SemGridRow Columns="GridUnit.Two">
-                <SemGridColumn Classes="@(new[] { ColumnClass.Left_Aligned })">
+
+            <SemGridRow>
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Ten" Classes="@(new[] { ColumnClass.Left_Aligned })">
                     <ValidationMessage For="@(() => ParentForm.userInfo.LastName)" />
                     <b>Surname</b>
-                    <SemFormField For="@(() => ParentForm.userInfo.LastName)" Classes="@(new[] { FieldClass.Inline })">
+                    <SemFormField For="@(() => ParentForm.userInfo.LastName)">
                         <SemInput @bind-Value="ParentForm.userInfo.LastName"  Size="InputSize.Large" ></SemInput>
                     </SemFormField>
-
+                </SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+            </SemGridRow>
+            <SemGridRow>
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Ten" Classes="@(new[] { ColumnClass.Left_Aligned })">
                     <b>Former names</b>
-                    <SemFormField For="@(() => ParentForm.userInfo.FormerNames)" Classes="@(new[] { FieldClass.Inline })">
+                    <SemFormField For="@(() => ParentForm.userInfo.FormerNames)">
                         <SemInput @bind-Value="ParentForm.userInfo.FormerNames"  Size="InputSize.Large" ></SemInput>
                     </SemFormField>
-                    
+                </SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+            </SemGridRow>
+            <SemGridRow>
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Ten" Classes="@(new[] { ColumnClass.Left_Aligned })">
                     <ValidationMessage For="@(() => ParentForm.userInfo.FirstName)" />
                     <b>First name(s)</b>
-                    <SemFormField For="@(() => ParentForm.userInfo.FirstName)" Classes="@(new[] { FieldClass.Inline })">
+                    <SemFormField For="@(() => ParentForm.userInfo.FirstName)" >
                         <SemInput @bind-Value="ParentForm.userInfo.FirstName"  Size="InputSize.Large"></SemInput>
                     </SemFormField>
-
+                </SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+            </SemGridRow>
+            <SemGridRow>
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Ten" Classes="@(new[] { ColumnClass.Left_Aligned })">
                     <ValidationMessage For="@(() => ParentForm.userInfo.Gender)" />
                     <b>Gender</b>
-                    <SemFormField For="@(() => ParentForm.userInfo.Gender)" Classes="@(new[] { FieldClass.Inline })">
+                    <SemFormField For="@(() => ParentForm.userInfo.Gender)" >
                         <SemDropdownSelection @bind-Value="ParentForm.userInfo.Gender" DefaultText="Select...">
                             <ListItems>
                                 <SemSelectListItem Text="male" Value="mäanlich"></SemSelectListItem>
@@ -64,64 +81,78 @@
                             </ItemTemplate>
                         </SemDropdownSelection>
                     </SemFormField>
-
+                </SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+            </SemGridRow>
+            <SemGridRow>
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Ten" Classes="@(new[] { ColumnClass.Left_Aligned })">
                     <ValidationMessage For="@(() => ParentForm.userInfo.BritishNationalities)" />
                     <b>British nationalitie(s)</b>
-                    <SemFormField For="@(() => ParentForm.userInfo.BritishNationalities)" Classes="@(new[] { FieldClass.Inline })">
+                    <SemFormField For="@(() => ParentForm.userInfo.BritishNationalities)" >
                         <SemDataDropdownMultiSelection @bind-Value="ParentForm.userInfo.BritishNationalities" Items="BritishNationalitiesList" DefaultText="Select..."></SemDataDropdownMultiSelection>
                     </SemFormField>
                 </SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
             </SemGridRow>
         </SemGrid>
     </MultiStepsFormCard>
     <MultiStepsFormCard Name="Contact details" ValidationGroup="contact">
-        <SemGrid Columns="GridUnit.One" Classes="@(new [] {GridClass.Centered})">
-            <SemGridRow Columns="GridUnit.One">
+        <SemGrid Classes="@(new [] {GridClass.Centered})">
+            <SemGridRow>
                 <SemGridColumn Classes="@(new[] { ColumnClass.Center_Aligned })">
                     <p>Contact data</p>
                     <p>Kontakt Angaben</p>
                 </SemGridColumn>
             </SemGridRow>
-            
+
             <SemGridRow>
-                <SemGridColumn Wide="GridUnit.Four"></SemGridColumn>
-                <SemGridColumn Wide="GridUnit.Four" Classes="@(new[] { ColumnClass.Left_Aligned})">
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Six" Classes="@(new[] { ColumnClass.Left_Aligned })">
                     <ValidationMessage For="@(() => ParentForm.userInfo.StreetAddress)" />
                     <b>Street address</b>
-                    <SemFormField For="@(() => ParentForm.userInfo.StreetAddress)" Classes="@(new[] { FieldClass.Inline})">
+                <SemFormField For="@(() => ParentForm.userInfo.StreetAddress)">
                         <SemInput @bind-Value="ParentForm.userInfo.StreetAddress"  Size="InputSize.Large" ></SemInput>
                     </SemFormField>
                 </SemGridColumn>
-                <SemGridColumn Wide="GridUnit.Four" Classes="@(new[] { ColumnClass.Left_Aligned})">
+                <SemGridColumn Wide="GridUnit.Four" Classes="@(new[] { ColumnClass.Left_Aligned })">
                     <ValidationMessage For="@(() => ParentForm.userInfo.Number)" />
                     <b>Number</b>
-                    <SemFormField For="@(() => ParentForm.userInfo.Number)" Classes="@(new[] { FieldClass.Inline})">
+                    <SemFormField For="@(() => ParentForm.userInfo.Number)">
                         <SemInput @bind-Value="ParentForm.userInfo.Number" Size="InputSize.Large"></SemInput>
                     </SemFormField>
-                </SemGridColumn>    
+                </SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
             </SemGridRow>
             <SemGridRow>
-                <SemGridColumn Wide="GridUnit.Four"></SemGridColumn>
-                <SemGridColumn Wide="GridUnit.Four" Classes="@(new[] { ColumnClass.Left_Aligned})">
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Four" Classes="@(new[] { ColumnClass.Left_Aligned })">
                     <ValidationMessage For="@(() => ParentForm.userInfo.ZipCode)" />
                     <b>Zip code</b>
-                    <SemFormField For="@(() => ParentForm.userInfo.ZipCode)" Classes="@(new[] { FieldClass.Inline})">
+                    <SemFormField For="@(() => ParentForm.userInfo.ZipCode)" >
                         <SemInput @bind-Value="ParentForm.userInfo.ZipCode"  Size="InputSize.Large" ></SemInput>
                     </SemFormField>
                 </SemGridColumn>
-                <SemGridColumn Wide="GridUnit.Four" Classes="@(new[] { ColumnClass.Left_Aligned})">
+                <SemGridColumn Wide="GridUnit.Six" Classes="@(new[] { ColumnClass.Left_Aligned })">
                     <ValidationMessage For="@(() => ParentForm.userInfo.City)" />
                     <b>City</b>
-                    <SemFormField For="@(() => ParentForm.userInfo.City)" Classes="@(new[] { FieldClass.Inline})">
+                    <SemFormField For="@(() => ParentForm.userInfo.City)" >
                         <SemInput @bind-Value="ParentForm.userInfo.City" Size="InputSize.Large"></SemInput>
                     </SemFormField>
-                </SemGridColumn>    
+                </SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
             </SemGridRow>
+            <SemGridRow>
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Six" Classes="@(new[] { ColumnClass.Left_Aligned })">
+                    <ValidationMessage For="@(() => ParentForm.userInfo.Email)" />
+                    <b>Email Address</b>
+                    <SemFormField For="@(() => ParentForm.userInfo.Email)" >
+                        <SemInput @bind-Value="ParentForm.userInfo.Email" Size="InputSize.Large"></SemInput>
+                    </SemFormField>
+                </SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Seven" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+            </SemGridRow>    
         </SemGrid>
-    </MultiStepsFormCard>
-    <MultiStepsFormCard Name="Final Step">
-        <div class="row">
-      <p>The final step has been reached. Thank you \o/</p>
-        </div>
     </MultiStepsFormCard>
 </MultiStepsForm>

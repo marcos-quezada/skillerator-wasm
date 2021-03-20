@@ -98,7 +98,8 @@ namespace skillerator.Components{
                 + AuslaenderbehoerdeItem.Plz + " " + AuslaenderbehoerdeItem.Ort + "}\\newcommand{\\Surname}{" + userInfo.LastName + "}\\newcommand{\\FirstName}{"
                 + userInfo.FirstName + "}\\newcommand{\\Gender}{" + userInfo.Gender + "}\\newcommand{\\CurrentAddressLineOne}{" + userInfo.StreetAddress + " "
                 + userInfo.Number + "}\\newcommand{\\CurrentAddressLineTwo}{" + userInfo.ZipCode + " " + userInfo.City + "}\\setboolean{IsRegistration}{"
-                + userInfo.isRegistration + "}\\setboolean{IsApplication}{" + userInfo.isCertificate + "}";
+                + userInfo.isRegistration + "}\\setboolean{IsApplication}{" + userInfo.isCertificate + "}\\newcommand{\\FormerNames}{" + userInfo.FormerNames
+                + "}\\newcommand{\\Email}{" + userInfo.Email + "}";
         }
         protected internal async Task<string> GeneratePDF(){
             await GetAuslanderbehoerdeId();

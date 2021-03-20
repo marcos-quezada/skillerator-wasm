@@ -9,9 +9,10 @@
         case "":
         case "intro":
             <div>
-                <SemGrid Columns="GridUnit.One" Classes="@(new [] {GridClass.Centered})">
-                    <SemGridRow Columns="GridUnit.Two">
-                        <SemGridColumn Classes="@(new[] { ColumnClass.Center_Aligned })">
+                <SemGrid Classes="@(new [] {GridClass.Centered})">
+                    <SemGridRow>
+                        <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                        <SemGridColumn Wide="GridUnit.Ten" Classes="@(new[] { ColumnClass.Center_Aligned })">
                             <h3>Are you a UK national living in Germany?</h3>
                             <p style="text-align: justify;text-justify: inter-word;">
                                 UK nationals living in Germany on 31 December 2020 and continuing to live in Germany must report their residence to the foreigners authority by 
@@ -20,36 +21,47 @@
                             <p>
                                 Check if you need to apply for a residence status and where to get one.
                             </p>
+                        </SemGridColumn>
+                        <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                    </SemGridRow>
+
+                    <SemGridRow>
+                        <SemGridColumn Wide="GridUnit.Five" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                        <SemGridColumn Wide="GridUnit.Six" Classes="@(new[] { ColumnClass.Center_Aligned })">
                             <SemButton Color="ButtonColor.Blue" Size="Size.Big" OnClick="@(() => GoToAction("elegibility"))">
                                 Get residence document
                             </SemButton>
                         </SemGridColumn>
+                        <SemGridColumn Wide="GridUnit.Five" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
                     </SemGridRow>
                 </SemGrid>
             </div>
             break;
         case "elegibility":
             <div>
-                <SemGrid Columns="GridUnit.One" Classes="@(new [] {GridClass.Centered})">
-                    <SemGridRow Columns="GridUnit.Two">
+                <SemGrid Classes="@(new [] {GridClass.Centered})">
+                    <SemGridRow>
                         <SemGridColumn Classes="@(new[] { ColumnClass.Center_Aligned })">
                             <p><b>Did you live in Germany on 31.12.2020?</b></p>
                             <p>Lebten Sie am 31.12.2020 in Deutschland?</p>
                         </SemGridColumn>
                     </SemGridRow>
-                    <SemGridRow Columns="GridUnit.Three">
-                        <SemGridColumn Classes="@(new[] { ColumnClass.Center_Aligned })">
-                            <SemButton Color="ButtonColor.Blue" Size="Size.Big" OnClick="@(() => GoToAction("apply"))"
-                                Classes="@(new[] { ButtonClass.Fluid})">
-                                Yes
-                            </SemButton>
-                        </SemGridColumn>
-                        <SemGridColumn Classes="@(new[] { ColumnClass.Center_Aligned })">
+
+                    <SemGridRow>
+                        <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                        <SemGridColumn Wide="GridUnit.Five" Classes="@(new[] { ColumnClass.Left_Aligned })">
                             <SemButton Color="ButtonColor.Blue" Size="Size.Big" Emphasis="Emphasis.Primary" 
                                 Classes="@(new[] { ButtonClass.Basic, ButtonClass.Fluid})" OnClick="@(() => GoToAction("search"))">
                                 No
                             </SemButton>
                         </SemGridColumn>
+                        <SemGridColumn Wide="GridUnit.Five" Classes="@(new[] { ColumnClass.Left_Aligned })">
+                            <SemButton Color="ButtonColor.Blue" Size="Size.Big" OnClick="@(() => GoToAction("apply"))"
+                                Classes="@(new[] { ButtonClass.Fluid})">
+                                Yes
+                            </SemButton>
+                        </SemGridColumn>
+                        <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
                     </SemGridRow>
                 </SemGrid>
             </div>
@@ -59,6 +71,19 @@
             break;
         case "apply":
             <BrexitToolComponent/>
+            break;
+        case "sucess":
+            <SemGrid Classes="@(new [] {GridClass.Centered})">
+                <SemGridRow>
+                    <SemGridColumn Classes="@(new[] { ColumnClass.Center_Aligned })">
+                        <h3>Your document is ready.</h3>
+                            <p style="text-align: justify;text-justify: inter-word;">
+                                We have sent to your e-mail the required file that you can print and deliver to your local foreigner office by 30 June 2021 
+                                in order to be able to obtain the new residence document.
+                            </p>
+                    </SemGridColumn>
+                </SemGridRow>
+            </SemGrid>
             break;
         default:
             <p>Action @Action not defined.</p>

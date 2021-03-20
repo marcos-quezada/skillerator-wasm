@@ -22,30 +22,32 @@
             @ChildContent
         </div>
 
-        <SemGrid Columns="GridUnit.One" Classes="@(new [] {GridClass.Centered})">
-            <SemGridRow Columns="GridUnit.Two">
-                <SemGridColumn Classes="@(new[] { ColumnClass.Center_Aligned })">
+        <SemGrid Classes="@(new [] {GridClass.Centered})">
+            <SemGridRow>
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Five" Classes="@(new[] { ColumnClass.Center_Aligned })">
                     <SemButton Color="ButtonColor.Blue" Enabled="@(ActiveStepIx > 0)" Emphasis="Emphasis.Primary" 
                         Classes="@(new[] { ButtonClass.Basic, ButtonClass.Fluid })" Size="Size.Big" OnClick="@(GoBack)">
                             @(ActiveStepIx == 0 ? "No Previous Step" : Cards[ActiveStepIx - 1].Name)
                     </SemButton>
                 </SemGridColumn>
                 @if(IsLastStep){
-                    <SemGridColumn Classes="@(new[] { ColumnClass.Center_Aligned })">
-                    <SemButton Color="ButtonColor.Blue" Size="Size.Big" IsSubmitButton="true" OnClick="@(SubmitValidForm)"
-                        Classes="@(new[] { ButtonClass.Fluid })">
-                            Submit
-                    </SemButton>
-                </SemGridColumn>
+                    <SemGridColumn Wide="GridUnit.Five"Classes="@(new[] { ColumnClass.Center_Aligned })">
+                        <SemButton Color="ButtonColor.Blue" Size="Size.Big" IsSubmitButton="true"
+                            Classes="@(new[] { ButtonClass.Fluid })">
+                                Submit
+                        </SemButton>
+                    </SemGridColumn>
                 }else
                 {
-                    <SemGridColumn Classes="@(new[] { ColumnClass.Center_Aligned })">
+                    <SemGridColumn Wide="GridUnit.Five" Classes="@(new[] { ColumnClass.Center_Aligned })">
                         <SemButton Color="ButtonColor.Blue" Size="Size.Big" OnClick="@(GoNext)" 
                             Classes="@(new[] { ButtonClass.Fluid })">
                                 @(Cards[ActiveStepIx + 1].Name)
                         </SemButton>
                     </SemGridColumn>        
                 }
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
             </SemGridRow>
         </SemGrid>
     </SemForm>
