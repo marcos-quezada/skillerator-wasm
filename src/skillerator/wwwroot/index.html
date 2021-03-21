@@ -19,10 +19,30 @@
     <link href="_content/SemanticBlazor/modules/semantic/calendar.min.css" rel="stylesheet" />
     <link href="_content/SemanticBlazor/SemanticBlazor.css" rel="stylesheet" />
     <script src="_content/SemanticBlazor/SemanticBlazor.js"></script>
+    <link href="css/spinner/base.css" rel="stylesheet" />
+    <link href="css/spinner/style.css" rel="stylesheet" />
 </head>
 
 <body>
-    <div id="app">Loading...</div>
+    <div id="app">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8 center-element">
+                    <p></p>
+                    <br />
+                    <div class="loading-wrapper">
+                        <div class="loading-pouring">
+                        </div>
+                    </div>
+                    <div class="loading-name">
+                        <p>Loading Skillerator App...</p>
+                    </div>
+                </div>
+                <div class="col-2"></div>
+            </div>
+        </div>
+    </div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
