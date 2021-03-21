@@ -5,8 +5,20 @@
                 @foreach (var step in Cards.Skip(1))
                 {
                     <li id="step-@(StepsIndex(step) + 1)" class="nav-item">
-                        <a class="nav-link @((ActiveStep == step) ? "active" : "")" href="javascript: void(0)" 
-                        @onclick="@(e=> SetActive(step))">@step.Name</a>
+                        @if (StepsIndex(step) < ActiveStepIx){
+                            <SemLabel Classes="@(new[] { LabelClass.Circular })" Color="Color.Orange" Size="Size.Large">
+                                <SemIcon Class="fitted check" />
+                            </SemLabel>
+                        }else if(ActiveStep == step)
+                        {
+                            <SemLabel Classes="@(new[] { LabelClass.Circular })" Color="Color.Blue" Size="Size.Large">
+                                @(StepsIndex(step))
+                            </SemLabel>    
+                        }else{
+                            <SemLabel Classes="@(new[] { LabelClass.Circular })" Color="Color.Grey" Size="Size.Large">
+                                @(StepsIndex(step))
+                            </SemLabel>
+                        }
                     </li>
                 }
             </ul>
@@ -24,15 +36,15 @@
 
         <SemGrid Classes="@(new [] {GridClass.Centered})">
             <SemGridRow>
-                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
-                <SemGridColumn Wide="GridUnit.Five" Classes="@(new[] { ColumnClass.Center_Aligned })">
+                <SemGridColumn Wide="GridUnit.Two" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Six" Classes="@(new[] { ColumnClass.Center_Aligned })">
                     <SemButton Color="ButtonColor.Blue" Enabled="@(ActiveStepIx > 0)" Emphasis="Emphasis.Primary" 
                         Classes="@(new[] { ButtonClass.Basic, ButtonClass.Fluid })" Size="Size.Big" OnClick="@(GoBack)">
                             @(ActiveStepIx == 0 ? "No Previous Step" : Cards[ActiveStepIx - 1].Name)
                     </SemButton>
                 </SemGridColumn>
                 @if(IsLastStep){
-                    <SemGridColumn Wide="GridUnit.Five"Classes="@(new[] { ColumnClass.Center_Aligned })">
+                    <SemGridColumn Wide="GridUnit.Six"Classes="@(new[] { ColumnClass.Center_Aligned })">
                         <SemButton Color="ButtonColor.Blue" Size="Size.Big" IsSubmitButton="true"
                             Classes="@(new[] { ButtonClass.Fluid })">
                                 Submit
@@ -40,14 +52,14 @@
                     </SemGridColumn>
                 }else
                 {
-                    <SemGridColumn Wide="GridUnit.Five" Classes="@(new[] { ColumnClass.Center_Aligned })">
+                    <SemGridColumn Wide="GridUnit.Six" Classes="@(new[] { ColumnClass.Center_Aligned })">
                         <SemButton Color="ButtonColor.Blue" Size="Size.Big" OnClick="@(GoNext)" 
                             Classes="@(new[] { ButtonClass.Fluid })">
                                 @(Cards[ActiveStepIx + 1].Name)
                         </SemButton>
                     </SemGridColumn>        
                 }
-                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Two" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
             </SemGridRow>
         </SemGrid>
     </SemForm>

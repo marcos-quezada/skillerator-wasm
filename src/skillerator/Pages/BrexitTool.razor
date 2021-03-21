@@ -42,26 +42,26 @@
                 <SemGrid Classes="@(new [] {GridClass.Centered})">
                     <SemGridRow>
                         <SemGridColumn Classes="@(new[] { ColumnClass.Center_Aligned })">
-                            <p><b>Did you live in Germany on 31.12.2020?</b></p>
-                            <p>Lebten Sie am 31.12.2020 in Deutschland?</p>
+                            <h3>Did you live in Germany on 31.12.2020?</h3>
+                            <h3 style="font-weight:normal;">Lebten Sie am 31.12.2020 in Deutschland?</h3>
                         </SemGridColumn>
                     </SemGridRow>
 
                     <SemGridRow>
-                        <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
-                        <SemGridColumn Wide="GridUnit.Five" Classes="@(new[] { ColumnClass.Left_Aligned })">
+                        <SemGridColumn Wide="GridUnit.Two" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                        <SemGridColumn Wide="GridUnit.Six" Classes="@(new[] { ColumnClass.Left_Aligned })">
                             <SemButton Color="ButtonColor.Blue" Size="Size.Big" Emphasis="Emphasis.Primary" 
                                 Classes="@(new[] { ButtonClass.Basic, ButtonClass.Fluid})" OnClick="@(() => GoToAction("search"))">
                                 No
                             </SemButton>
                         </SemGridColumn>
-                        <SemGridColumn Wide="GridUnit.Five" Classes="@(new[] { ColumnClass.Left_Aligned })">
+                        <SemGridColumn Wide="GridUnit.Six" Classes="@(new[] { ColumnClass.Left_Aligned })">
                             <SemButton Color="ButtonColor.Blue" Size="Size.Big" OnClick="@(() => GoToAction("apply"))"
                                 Classes="@(new[] { ButtonClass.Fluid})">
                                 Yes
                             </SemButton>
                         </SemGridColumn>
-                        <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                        <SemGridColumn Wide="GridUnit.Two" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
                     </SemGridRow>
                 </SemGrid>
             </div>
