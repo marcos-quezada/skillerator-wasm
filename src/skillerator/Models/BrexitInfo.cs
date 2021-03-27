@@ -28,9 +28,11 @@ namespace skillerator.Models{
         [Display(Name = "Familienname")] public string LastName { get; set; }
         [Display(Name = "Frühere Namen")] public string FormerNames {get; set;}
         [Display(Name = "Geschlecht")] public string Gender {get; set;}
-        [Display(Name = "Geburtsdatum")] public string Birthdate {get; set;}
+        [Display(Name = "Geburtsdatum")] public DateTime Birthdate {get; set;}
+
+        [Display(Name = "Geburtsort")] public string BirthPlace {get; set;}
         [Display(Name = "Britische Staatsangehörigkeiten")] public List<string> BritishNationalities {get; set;}
-        [Display(Name = "Weitere Staatsangehörigkeiten")] public string[] OtherNationalities{get; set;} 
+        [Display(Name = "Weitere Staatsangehörigkeiten")] public List<string> OtherNationalities{get; set;} 
         [Display(Name = "Wohnadresse")] public string StreetAddress{get; set;} 
         [Display(Name = "Hausnummer")] public string Number{get; set;} 
         [Display(Name = "PLZ")] public int ZipCode{get; set;} 

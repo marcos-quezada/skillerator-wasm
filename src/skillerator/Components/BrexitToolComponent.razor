@@ -84,6 +84,26 @@
                 </SemGridColumn>
                 <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
             </SemGridRow>
+
+            <SemGridRow>
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Five" Classes="@(new[] { ColumnClass.Left_Aligned })">
+                    <ValidationMessage For="@(() => ParentForm.userInfo.Birthdate)" />
+                    <b>Birthdate</b>
+                <SemFormField For="@(() => ParentForm.userInfo.Birthdate)">
+                        <SemDateInput @bind-Value="ParentForm.userInfo.Birthdate"  Size="InputSize.Large" ></SemDateInput>
+                    </SemFormField>
+                </SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Five" Classes="@(new[] { ColumnClass.Left_Aligned })">
+                    <ValidationMessage For="@(() => ParentForm.userInfo.BirthPlace)" />
+                    <b>Place of bith</b>
+                    <SemFormField For="@(() => ParentForm.userInfo.BirthPlace)">
+                        <SemInput @bind-Value="ParentForm.userInfo.BirthPlace" Size="InputSize.Large"></SemInput>
+                    </SemFormField>
+                </SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+            </SemGridRow>
+
             <SemGridRow>
                 <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
                 <SemGridColumn Wide="GridUnit.Ten" Classes="@(new[] { ColumnClass.Left_Aligned })">
@@ -91,6 +111,24 @@
                     <b>British nationalitie(s)</b>
                     <SemFormField For="@(() => ParentForm.userInfo.BritishNationalities)" >
                         <SemDataDropdownMultiSelection @bind-Value="ParentForm.userInfo.BritishNationalities" Items="BritishNationalitiesList" DefaultText="Select..."></SemDataDropdownMultiSelection>
+                    </SemFormField>
+                </SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+            </SemGridRow>
+
+            <SemGridRow>
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Ten" Classes="@(new[] { ColumnClass.Left_Aligned })">
+                    <ValidationMessage For="@(() => ParentForm.userInfo.OtherNationalities)" />
+                    <b>Other nationalitie(s)</b>
+                    <SemFormField For="@(() => ParentForm.userInfo.OtherNationalities)" >
+                        <SemDataDropdownMultiSelection @bind-Value="ParentForm.userInfo.OtherNationalities" Items="CountriesList" 
+                            ValueSelector="@(regionInfo => regionInfo.countryName)" ItemText="@(regionInfo => regionInfo.countryName)" DefaultText="Select..."  Search="true">
+                                <ItemTemplate>
+                                    <i class="@(((skillerator.Models.GeonameItem)context).countryCodeCSSClass)"></i>
+                                    <span class="text">@(((skillerator.Models.GeonameItem)context).countryName)</span>
+                                </ItemTemplate>
+                        </SemDataDropdownMultiSelection>
                     </SemFormField>
                 </SemGridColumn>
                 <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>

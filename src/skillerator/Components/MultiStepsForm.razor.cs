@@ -39,7 +39,7 @@ namespace skillerator.Components{
         private const string BEHOERDEN_SERVICE_ENDPOINT = "https://bamf-navi.bamf.de/atlas-backend/behoerden/zustaendigkeiten";
         private const string DOWNLOAD_LINK_TEMPLATE = "http://api.skillerator.de/project/{0}/build/{1}/output/output.pdf";
 
-        [CascadingParameter] protected internal Dictionary<long, AuslaenderbehoerdeData> AuslaenderbehoerdeDictionary{get; set;}
+        [CascadingParameter(Name="AuslaenderbehoerdeDictionary")] protected internal Dictionary<long, AuslaenderbehoerdeData> AuslaenderbehoerdeDictionary{get; set;}
         bool PartialValidate(string RuleSetsName)
         {
             Console.WriteLine($"userInfo is elegible value : {userInfo.isElegible}");
