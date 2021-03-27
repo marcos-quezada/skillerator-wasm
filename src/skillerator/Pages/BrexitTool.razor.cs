@@ -13,7 +13,7 @@ namespace skillerator.Pages{
         [Inject] protected NavigationManager NavigationManager {get; set;}
         [Inject] protected HttpClient Http {get; set;}
         private const string SERVICE_ENDPOINT = "https://proxy.skillerator.de/api/bamf-abh";
-        private const string GEONAMES_SERVICE_ENDPOINT = "http://api.geonames.org/countryInfoJSON";
+        private const string GEONAMES_SERVICE_ENDPOINT = "https://proxy.skillerator.de/api/countries";
         //private const string SERVICE_ENDPOINT = "https://bamf-navi.bamf.de/atlas-backend/behoerden/abh";
 
         public Dictionary<long, AuslaenderbehoerdeData> AuslaenderbehoerdeDictionary = new Dictionary<long, AuslaenderbehoerdeData>();
@@ -46,8 +46,7 @@ namespace skillerator.Pages{
 
         protected internal async Task RetrieveCountriesList(){
             UriBuilder builder = new UriBuilder(GEONAMES_SERVICE_ENDPOINT);
-            builder.Query = "username=skillerator";
- 
+            
             var requestMessage = new HttpRequestMessage() {
                 Method = new HttpMethod("GET"),
                 RequestUri = builder.Uri
