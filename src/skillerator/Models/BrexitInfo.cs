@@ -24,6 +24,20 @@ namespace skillerator.Models{
                 _isRegistration = !value;
             }
         }
+
+        public bool requiresMaritalStatusSinceDate{
+            get{
+                return !(MaritalStatus is null) && !MaritalStatus.Equals("ledig");
+            }
+        }
+
+        public List<SixMonthsPlusOutStay> SixMonthsPlusOutStayList {get; set;} = new List<SixMonthsPlusOutStay>();
+
+        public List<AdditionalFamilyMemberData> AdditionalFamilyMemberDataList {get; set;} = new List<AdditionalFamilyMemberData>();
+        [Display(Name = "Größe")] public int Height{get; set;}
+        [Display(Name = "Augenfarbe")] public string EyeColour{get; set;}
+        [Display(Name = "seit / am")]public DateTime MaritalStatusDate {get; set;}
+        [Display(Name = "Familienstatus")]public string MaritalStatus {get; set;}
         [Display(Name = "Vorname(n)")] public string FirstName { get; set; }
         [Display(Name = "Familienname")] public string LastName { get; set; }
         [Display(Name = "Frühere Namen")] public string FormerNames {get; set;}

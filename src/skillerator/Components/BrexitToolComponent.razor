@@ -1,3 +1,5 @@
+@using skillerator.Shared
+
 <MultiStepsForm @ref="ParentForm" Id="BrexitToolForm">
     <MultiStepsFormCard Name="Nature of application">
         <SemGrid Classes="@(new [] {GridClass.Centered})">
@@ -8,8 +10,8 @@
             </SemGridRow>
 
             <SemGridRow>
-                <SemGridColumn Wide="GridUnit.Three"></SemGridColumn>
-                <SemGridColumn Wide="GridUnit.Ten" Classes="@(new[] { ColumnClass.Left_Aligned })">
+                <SemGridColumn Wide="GridUnit.Six"></SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Five" Classes="@(new[] { ColumnClass.Left_Aligned })">
                     <SemFormField For="@(() => ParentForm.userInfo.isRegistration)">
                         <SemCheckbox @bind-Value="ParentForm.userInfo.isRegistration" Label="Registration of UK citizens at the Foreigners Office"></SemCheckbox>
                     </SemFormField>
@@ -17,10 +19,11 @@
                         <SemCheckbox @bind-Value="ParentForm.userInfo.isCertificate" Label="Application for a fictional certificate for UK citizens"></SemCheckbox>
                     </SemFormField>
                 </SemGridColumn>
-                <SemGridColumn Wide="GridUnit.Three"></SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Five"></SemGridColumn>
             </SemGridRow>
         </SemGrid>
     </MultiStepsFormCard>
+
     <MultiStepsFormCard Name="Personal details" ValidationGroup="personal">
         <SemGrid Classes="@(new [] {GridClass.Centered})">
             <SemGridRow>
@@ -70,7 +73,7 @@
                     <SemFormField For="@(() => ParentForm.userInfo.Gender)" >
                         <SemDropdownSelection @bind-Value="ParentForm.userInfo.Gender" DefaultText="Select...">
                             <ListItems>
-                                <SemSelectListItem Text="male" Value="mäanlich"></SemSelectListItem>
+                                <SemSelectListItem Text="male" Value="männlich"></SemSelectListItem>
                                 <SemSelectListItem Text="female" Value="weiblich"></SemSelectListItem>
                                 <SemSelectListItem Text="diverse" Value="divers"></SemSelectListItem>
                                 <SemSelectListItem Text="without specification" Value="ohne Angaben"></SemSelectListItem>
@@ -90,7 +93,7 @@
                 <SemGridColumn Wide="GridUnit.Five" Classes="@(new[] { ColumnClass.Left_Aligned })">
                     <ValidationMessage For="@(() => ParentForm.userInfo.Birthdate)" />
                     <b>Birthdate</b>
-                <SemFormField For="@(() => ParentForm.userInfo.Birthdate)">
+                    <SemFormField For="@(() => ParentForm.userInfo.Birthdate)">
                         <SemDateInput @bind-Value="ParentForm.userInfo.Birthdate"  Size="InputSize.Large" ></SemDateInput>
                     </SemFormField>
                 </SemGridColumn>
@@ -133,8 +136,129 @@
                 </SemGridColumn>
                 <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
             </SemGridRow>
+
+            <SemGridRow>
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Five" Classes="@(new[] { ColumnClass.Left_Aligned })">
+                    <ValidationMessage For="@(() => ParentForm.userInfo.MaritalStatus)" />
+                    <b>Marital Status</b>
+                    <SemFormField For="@(() => ParentForm.userInfo.MaritalStatus)">
+                        <SemDataDropdownSelection @bind-Value="ParentForm.userInfo.MaritalStatus" Items="MaritalStatusList" ValueSelector="@(MaritalStatusItem => MaritalStatusItem.Item1)" 
+                            ItemText="@(MaritalStatusItem => MaritalStatusItem.Item1)" DefaultText="Select...">
+                            <ItemTemplate>
+                                <span class="text">@((((string, string))context).Item1)</span>
+                                <span class="description">@((((string, string))context).Item2)</span>
+                            </ItemTemplate>
+                        </SemDataDropdownSelection>
+                    </SemFormField>
+                </SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Five" Classes="@(new[] { ColumnClass.Left_Aligned })">
+                    @if(ParentForm.userInfo.requiresMaritalStatusSinceDate){
+                        <ValidationMessage For="@(() => ParentForm.userInfo.MaritalStatusDate)" />
+                        <b>since / on</b>
+                        <SemFormField For="@(() => ParentForm.userInfo.MaritalStatusDate)">
+                            <SemDateInput @bind-Value="ParentForm.userInfo.MaritalStatusDate"  Size="InputSize.Large" ></SemDateInput>
+                        </SemFormField>
+                    }   
+                </SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+            </SemGridRow>4
+
+            <SemGridRow>
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Ten" Classes="@(new[] { ColumnClass.Left_Aligned })">
+                    <p><b>Stays in a foreign country exceeding six months</b><br/>
+                    Auslandsaufenthalte von mehr als sechs Monaten</p>
+                </SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+            </SemGridRow>
+            @foreach(var (item, index) in ParentForm.userInfo.SixMonthsPlusOutStayList.WithIndex()){
+                <SemGridRow>
+                    <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                    <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })">
+                        <ValidationMessage For="@(() => ParentForm.userInfo.SixMonthsPlusOutStayList[index].From)" />
+                        <b>from</b>
+                        <SemFormField For="@(() => ParentForm.userInfo.SixMonthsPlusOutStayList[index].From)">
+                            <SemDateInput @bind-Value="ParentForm.userInfo.SixMonthsPlusOutStayList[index].From" Size="InputSize.Large"></SemDateInput>
+                        </SemFormField>
+                    </SemGridColumn>
+                    <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })">
+                        <ValidationMessage For="@(() => ParentForm.userInfo.SixMonthsPlusOutStayList[index].To)" />
+                        <b>to</b>
+                        <SemFormField For="@(() => ParentForm.userInfo.SixMonthsPlusOutStayList[index].To)">
+                            <SemDateInput @bind-Value="ParentForm.userInfo.SixMonthsPlusOutStayList[index].To" Size="InputSize.Large"></SemDateInput>
+                        </SemFormField>
+                    </SemGridColumn>
+                    <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })">
+                        <ValidationMessage For="@(() => ParentForm.userInfo.SixMonthsPlusOutStayList[index].Country)" />
+                        <b>in</b>
+                        <SemFormField For="@(() => ParentForm.userInfo.SixMonthsPlusOutStayList[index].Country)" >
+                            <SemDataDropdownSelection @bind-Value="ParentForm.userInfo.SixMonthsPlusOutStayList[index].Country" Items="CountriesList" 
+                                ValueSelector="@(regionInfo => regionInfo.countryName)" ItemText="@(regionInfo => regionInfo.countryName)" DefaultText="Select..."  Search="true">
+                                    <ItemTemplate>
+                                        <i class="@(((skillerator.Models.GeonameItem)context).countryCodeCSSClass)"></i>
+                                        <span class="text">@(((skillerator.Models.GeonameItem)context).countryName)</span>
+                                    </ItemTemplate>
+                            </SemDataDropdownSelection>
+                        </SemFormField>
+                    </SemGridColumn>
+                    <SemGridColumn Wide="GridUnit.One" Classes="@(new[] { ColumnClass.Right_Aligned})">
+                        <SemButton OnClick="@(() => RemoveSixMonthsPlusOutStay(index))" Icon="Icon.Trash" Size="Size.Big" Style="position: absolute; bottom: 0;"></SemButton>
+                    </SemGridColumn>
+                    <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                </SemGridRow>
+            }
+
+            <SemGridRow>
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                <SemGridColumn Wide="GridUnit.One" Classes="@(new[] { ColumnClass.Left_Aligned })">
+                    <SemButton OnClick="@(() => AddSixMonthsPlusOutStay())" Icon="Icon.Plus_Circle" Size="Size.Big"></SemButton>
+                </SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Nine" Classes="@(new[] { ColumnClass.Left_Aligned })">
+                    <p><b>Add period</b><br/>
+                    Zeitraum hinzufügen</p>
+                </SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+            </SemGridRow>
+
         </SemGrid>
     </MultiStepsFormCard>
+
+    <MultiStepsFormCard Name="Distinctive features">
+        <SemGrid Classes="@(new [] {GridClass.Centered})">
+            <SemGridRow>
+                <SemGridColumn Classes="@(new[] { ColumnClass.Center_Aligned })">
+                    <h3>Distinctive features</h3>
+                    <h3 style="font-weight:normal;">Persönliche Merkmale</h3>
+                </SemGridColumn>
+            </SemGridRow>
+            <SemGridRow>
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Six" Classes="@(new[] { ColumnClass.Left_Aligned })">
+                    <ValidationMessage For="@(() => ParentForm.userInfo.EyeColour)" />
+                    <b>Eye colour</b>
+                    <SemFormField For="@(() => ParentForm.userInfo.EyeColour)">
+                        <SemDataDropdownSelection @bind-Value="ParentForm.userInfo.EyeColour" Items="EyeColourList" ValueSelector="@(EyeColourItem => EyeColourItem.Item1)" 
+                            ItemText="@(EyeColourItem => EyeColourItem.Item1)" DefaultText="Select...">
+                            <ItemTemplate>
+                                <span class="text">@((((string, string))context).Item1)</span>
+                                <span class="description">@((((string, string))context).Item2)</span>
+                            </ItemTemplate>
+                        </SemDataDropdownSelection>
+                    </SemFormField>
+                </SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Four" Classes="@(new[] { ColumnClass.Left_Aligned })">
+                    <ValidationMessage For="@(() => ParentForm.userInfo.Height)" />
+                    <b>Height (in cm)</b>
+                    <SemFormField For="@(() => ParentForm.userInfo.Height)" >
+                        <SemInput @bind-Value="ParentForm.userInfo.Height"  Size="InputSize.Large" ></SemInput>
+                    </SemFormField>
+                </SemGridColumn>
+                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>    
+            </SemGridRow>
+        </SemGrid>
+    </MultiStepsFormCard>
+
     <MultiStepsFormCard Name="Contact details" ValidationGroup="contact">
         <SemGrid Classes="@(new [] {GridClass.Centered})">
             <SemGridRow>
