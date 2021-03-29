@@ -162,7 +162,7 @@
                     }   
                 </SemGridColumn>
                 <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
-            </SemGridRow>4
+            </SemGridRow>
 
             <SemGridRow>
                 <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
@@ -202,8 +202,8 @@
                             </SemDataDropdownSelection>
                         </SemFormField>
                     </SemGridColumn>
-                    <SemGridColumn Wide="GridUnit.One" Classes="@(new[] { ColumnClass.Right_Aligned})">
-                        <SemButton OnClick="@(() => RemoveSixMonthsPlusOutStay(index))" Icon="Icon.Trash" Size="Size.Big" Style="position: absolute; bottom: 0;"></SemButton>
+                    <SemGridColumn Wide="GridUnit.One" Classes="@(new[] { ColumnClass.Left_Aligned})" Style="padding-top: 2.585714em;">
+                        <SemButton OnClick="@(() => RemoveSixMonthsPlusOutStay(index))" Icon="Icon.Trash" Size="Size.Big" ></SemButton>
                     </SemGridColumn>
                     <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
                 </SemGridRow>

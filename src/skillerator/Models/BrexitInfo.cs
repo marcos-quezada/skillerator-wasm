@@ -27,7 +27,7 @@ namespace skillerator.Models{
 
         public bool requiresMaritalStatusSinceDate{
             get{
-                return !(MaritalStatus is null) && !MaritalStatus.Equals("ledig");
+                return !(MaritalStatus is null) && !MaritalStatus.Equals("single");
             }
         }
 

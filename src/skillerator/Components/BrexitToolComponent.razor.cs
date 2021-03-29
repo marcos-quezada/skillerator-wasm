@@ -14,23 +14,23 @@ namespace skillerator.Components{
             "British Subject (without right of abode)", "British Overseas Citizen", "British Overseas Territories Citizen (Gibraltar)", "British Overseas Territories Citizen (not Gibraltar)"};
         
         protected internal List<(string, string)> MaritalStatusList = new List<(string, string)>(){
-            ("ledig","single"),
-            ("verheiratet/ eingetragene Partnerschaft", "married/ registered partnership"),
-            ("getrenntlebend", "separated"),
-            ("Scheidung eingereicht", "applied for divorce"),
-            ("verwitwet", "widowed"),
-            ("geschieden/ Partnerschaft aufgehoben", "divorced/ partnership annulled")
+            ("single", "ledig"),
+            ("married/ registered partnership", "verheiratet/ eingetragene Partnerschaft"),
+            ("separated", "getrenntlebend"),
+            ("applied for divorce", "Scheidung eingereicht"),
+            ("widowed", "verwitwet"),
+            ("divorced/ partnership annulled", "geschieden/ Partnerschaft aufgehoben")
         };
 
         protected internal List<(string, string)> EyeColourList = new List<(string, string)>(){
-            ("braun", "brown"),
-            ("blau", "blue"),
-            ("grau", "grey"),
-            ("grün", "green"),
-            ("blaugrün", "blue-green"),
-            ("blaugrau", "blue-grey"),
-            ("graugrün", "grey-green"),
-            ("graübraun", "green-brown")
+            ("brown", "braun"),
+            ("blue", "blau"),
+            ("grey", "grau"),
+            ("green", "grün"),
+            ("blue-green", "blaugrün"),
+            ("blue-grey", "blaugrau"),
+            ("grey-green", "graugrün"),
+            ("green-brown", "graübraun")
         };
 
         protected internal void AddSixMonthsPlusOutStay(){
