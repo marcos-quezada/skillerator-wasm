@@ -6,10 +6,10 @@ using System;
 namespace skillerator.Models{
     public class BrexitInfo{
         
-        [Display(Name = "Lebten Sie am 31.12.2020 in Deutschland?")] public bool isElegible{get;set;}
+        [Display(Name = "Lebten Sie am 31.12.2020 in Deutschland?")] public bool IsElegible{get;set;}
 
         private bool _isRegistration;
-        [Display(Name = "Aufenthaltsanzeige von britischen Staatsangehörigen")] public bool isRegistration{
+        [Display(Name = "Aufenthaltsanzeige von britischen Staatsangehörigen")] public bool IsRegistration{
             get{
                 return _isRegistration;
             }
@@ -17,7 +17,7 @@ namespace skillerator.Models{
                 _isRegistration = value;
             }
         }
-        [Display(Name = "Antrag für eine Fiktionsbescheinigung für britische Staatsangehörige")] public bool isCertificate {
+        [Display(Name = "Antrag für eine Fiktionsbescheinigung für britische Staatsangehörige")] public bool IsCertificate {
             get{
                 return !_isRegistration;
             } set{
@@ -25,11 +25,7 @@ namespace skillerator.Models{
             }
         }
 
-        public bool requiresMaritalStatusSinceDate{
-            get{
-                return !(MaritalStatus is null) && !MaritalStatus.Equals("single");
-            }
-        }
+        public bool RequiresMaritalStatusSinceDate => !(MaritalStatus is null) && !MaritalStatus.Equals("single");
 
         public List<SixMonthsPlusOutStay> SixMonthsPlusOutStayList {get; set;} = new List<SixMonthsPlusOutStay>();
 

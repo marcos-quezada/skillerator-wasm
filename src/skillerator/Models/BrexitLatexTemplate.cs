@@ -1,40 +1,40 @@
 namespace skillerator.Models{
     public class BrexitLatexTemplate{
-        public CompileElement compile {get; set;}
+        public CompileElement Compile {get; set;}
 
         public BrexitLatexTemplate(CompileElement compile){
-            this.compile = compile;
+            this.Compile = compile;
         }
     }
 
     public class CompileElement{
-        public Options options {get; set;}
-        public Resource[] resources {get; set;} 
+        public Options Options {get; set;}
+        public Resource[] Resources {get; set;} 
 
         public CompileElement(Options options, Resource[] resources){
-            this.options = options;
-            this.resources = resources;
+            this.Options = options;
+            this.Resources = resources;
         }
     }
 
     public class Options{
-        public string compiler {get; set;}
-        public int timeout {get; set;}
+        public string Compiler {get; set;}
+        public int Timeout {get; set;}
 
         public Options(string compiler, int timeout){
-            this.compiler = compiler;
-            this.timeout = timeout;
+            this.Compiler = compiler;
+            this.Timeout = timeout;
         }
         
     }
 
     public class Resource{
-        public string path {get; set;}
-        public string content {get; set;}
+        public string Path {get; set;}
+        public string Content {get; set;}
 
         public Resource(string path, string content){
-            this.path = path;
-            this.content = content;
+            this.Path = path;
+            this.Content = content;
         }
     }
 

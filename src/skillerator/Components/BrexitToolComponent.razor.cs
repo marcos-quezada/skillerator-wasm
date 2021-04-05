@@ -13,7 +13,7 @@ namespace skillerator.Components{
         protected internal string[] BritishNationalitiesList = new string[] {"British Citizen", "British National (Overseas)", "British Protected Person", "British Subject (right of abode)",
             "British Subject (without right of abode)", "British Overseas Citizen", "British Overseas Territories Citizen (Gibraltar)", "British Overseas Territories Citizen (not Gibraltar)"};
         
-        protected internal List<(string, string)> MaritalStatusList = new List<(string, string)>(){
+        protected internal List<(string, string)> MaritalStatusList = new(){
             ("single", "ledig"),
             ("married/ registered partnership", "verheiratet/ eingetragene Partnerschaft"),
             ("separated", "getrenntlebend"),
@@ -22,7 +22,7 @@ namespace skillerator.Components{
             ("divorced/ partnership annulled", "geschieden/ Partnerschaft aufgehoben")
         };
 
-        protected internal List<(string, string)> EyeColourList = new List<(string, string)>(){
+        protected internal List<(string, string)> EyeColourList = new(){
             ("brown", "braun"),
             ("blue", "blau"),
             ("grey", "grau"),
@@ -34,11 +34,19 @@ namespace skillerator.Components{
         };
 
         protected internal void AddSixMonthsPlusOutStay(){
-            ParentForm.userInfo.SixMonthsPlusOutStayList.Add(new SixMonthsPlusOutStay());
+            ParentForm.UserInfo.SixMonthsPlusOutStayList.Add(new SixMonthsPlusOutStay());
         }
 
         protected internal void RemoveSixMonthsPlusOutStay(int index){
-            ParentForm.userInfo.SixMonthsPlusOutStayList.RemoveAt(index);
+            ParentForm.UserInfo.SixMonthsPlusOutStayList.RemoveAt(index);
+        }
+
+        protected internal void AddAdditionalFamilyMemberData(){
+            ParentForm.UserInfo.AdditionalFamilyMemberDataList.Add(new AdditionalFamilyMemberData());
+        }
+
+        protected internal void RemoveAdditionalFamilyMemberData(int index){
+            ParentForm.UserInfo.AdditionalFamilyMemberDataList.RemoveAt(index);
         }
     }
 }

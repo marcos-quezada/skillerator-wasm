@@ -16,7 +16,7 @@ namespace skillerator.Pages{
         private const string GEONAMES_SERVICE_ENDPOINT = "https://proxy.skillerator.de/api/countries";
         //private const string SERVICE_ENDPOINT = "https://bamf-navi.bamf.de/atlas-backend/behoerden/abh";
 
-        public Dictionary<long, AuslaenderbehoerdeData> AuslaenderbehoerdeDictionary = new Dictionary<long, AuslaenderbehoerdeData>();
+        public Dictionary<long, AuslaenderbehoerdeData> AuslaenderbehoerdeDictionary = new();
         public List<GeonameItem> CountriesList {get; set;}
 
         protected internal void GoToAction(string Action){
@@ -34,8 +34,8 @@ namespace skillerator.Pages{
             requestMessage.Headers.Add("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.34 (KHTML, like Gecko) Qt/4.8.2");
 
             var response = await Http.SendAsync(requestMessage);
-            var responseStatusCode = response.StatusCode;
-            
+            _ = response.StatusCode;
+
             AuslaenderbehoerdeData[] AuslaenderbehoerdeList = await response.Content.ReadFromJsonAsync<AuslaenderbehoerdeData[]>();
              
             foreach(var item in AuslaenderbehoerdeList){
@@ -45,7 +45,7 @@ namespace skillerator.Pages{
         }
 
         protected internal async Task RetrieveCountriesList(){
-            UriBuilder builder = new UriBuilder(GEONAMES_SERVICE_ENDPOINT);
+            UriBuilder builder = new(GEONAMES_SERVICE_ENDPOINT);
             
             var requestMessage = new HttpRequestMessage() {
                 Method = new HttpMethod("GET"),
@@ -57,10 +57,10 @@ namespace skillerator.Pages{
             requestMessage.Headers.Add("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.34 (KHTML, like Gecko) Qt/4.8.2");
 
             var response = await Http.SendAsync(requestMessage);
-            var responseStatusCode = response.StatusCode;
-            
-            Geonames geonames = await response.Content.ReadFromJsonAsync<Geonames>();
-            CountriesList = geonames.geonames;
+            _ = response.StatusCode;
+
+            GeonamesData geonames = await response.Content.ReadFromJsonAsync<GeonamesData>();
+            CountriesList = geonames.Geonames;
         }
 
         protected override async Task OnInitializedAsync()

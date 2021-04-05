@@ -1,12 +1,12 @@
 namespace skillerator.Models{
     public class EmailContentData{
-        public string to {get; set; }
-        public string subject {get; set;}
-        public string body {get; set;}
+        public string To {get; set; }
+        public string Subject {get; set;}
+        public string Body {get; set;}
         public EmailContentData(string to, string subject, string body){
-            this.to = to;
-            this.subject = subject;
-            this.body = body;
+            this.To = to;
+            this.Subject = subject;
+            this.Body = body;
         }
     }
 }

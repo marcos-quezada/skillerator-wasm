@@ -172,11 +172,11 @@ namespace skillerator.Shared
         {
             var uri = new Uri(url);
             string themeName = HttpUtility.ParseQueryString(uri.Query).Get("theme");
-            themeName = themeName != null ? themeName : "bootstrap4";
+            themeName ??= "bootstrap4";
             return themeName;
         }
 
-        public static List<DropDownData> ThemeData = new List<DropDownData>
+        private static List<DropDownData> themeData = new()
         {
             new DropDownData { ID = "material", Text = "Material" },
             new DropDownData { ID = "fabric", Text = "Fabric" },
@@ -184,6 +184,8 @@ namespace skillerator.Shared
             new DropDownData { ID = "bootstrap4", Text = "Bootstrap v4" },
             new DropDownData { ID = "highcontrast", Text = "High Contrast" }
         };
+
+        public static List<DropDownData> ThemeData { get => themeData; set => themeData = value; }
     }
 
     /// <summary>
