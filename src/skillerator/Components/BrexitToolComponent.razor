@@ -318,7 +318,7 @@
         </SemGrid>
     </MultiStepsFormCard>
 
-    <MultiStepsFormCard Name="Contact details" ValidationGroup="contact">
+    <MultiStepsFormCard Name="Migration status">
         <SemGrid Classes="@(new [] {GridClass.Centered})">
             <SemGridRow>
                 <SemGridColumn Classes="@(new[] { ColumnClass.Center_Aligned })">
@@ -327,73 +327,146 @@
                 </SemGridColumn>
             </SemGridRow>
 
-            <SemGridRow>
-                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
-                <SemGridColumn Wide="GridUnit.Ten" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
-                <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
-            </SemGridRow>
+            <SemModal @ref="additionalFamilyMemberModal" Class="fullscreen">
+                <Header>
+                    Example @AdditionalFamilyMemberIdx modal dialog
+                </Header>
+                <Content>
+                    @if(ParentForm.UserInfo.AdditionalFamilyMemberDataList.Any()){
+                        <SemGrid Columns="GridUnit.Four">
+                            <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                            <SemGridColumn Wide="GridUnit.Five" Classes="@(new[] { ColumnClass.Left_Aligned })">
+                                <ValidationMessage For="@(() => ParentForm.UserInfo.AdditionalFamilyMemberDataList[AdditionalFamilyMemberIdx].LastName)" />
+                                <b>Surname</b>
+                                <SemFormField For="@(() => ParentForm.UserInfo.AdditionalFamilyMemberDataList[AdditionalFamilyMemberIdx].LastName)">
+                                    <SemInput @bind-Value="ParentForm.UserInfo.AdditionalFamilyMemberDataList[AdditionalFamilyMemberIdx].LastName"  Size="InputSize.Large" ></SemInput>
+                                </SemFormField>
+                            </SemGridColumn>
+                            <SemGridColumn Wide="GridUnit.Five" Classes="@(new[] { ColumnClass.Left_Aligned })">
+                                <ValidationMessage For="@(() => ParentForm.UserInfo.AdditionalFamilyMemberDataList[AdditionalFamilyMemberIdx].FirstName)" />
+                                <b>First name(s)</b>
+                                <SemFormField For="@(() => ParentForm.UserInfo.AdditionalFamilyMemberDataList[AdditionalFamilyMemberIdx].FirstName)" >
+                                    <SemInput @bind-Value="ParentForm.UserInfo.AdditionalFamilyMemberDataList[AdditionalFamilyMemberIdx].FirstName"  Size="InputSize.Large"></SemInput>
+                                </SemFormField>
+                            </SemGridColumn>
+                            <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                            <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                            <SemGridColumn Wide="GridUnit.Five" Classes="@(new[] { ColumnClass.Left_Aligned })">
+                                <ValidationMessage For="@(() => ParentForm.UserInfo.AdditionalFamilyMemberDataList[AdditionalFamilyMemberIdx].Gender)" />
+                                <b>Gender</b>
+                                <SemFormField For="@(() => ParentForm.UserInfo.AdditionalFamilyMemberDataList[AdditionalFamilyMemberIdx].Gender)" >
+                                    <SemDropdownSelection @bind-Value="ParentForm.UserInfo.AdditionalFamilyMemberDataList[AdditionalFamilyMemberIdx].Gender" DefaultText="Select...">
+                                        <ListItems>
+                                            <SemSelectListItem Text="male" Value="männlich"></SemSelectListItem>
+                                            <SemSelectListItem Text="female" Value="weiblich"></SemSelectListItem>
+                                            <SemSelectListItem Text="diverse" Value="divers"></SemSelectListItem>
+                                            <SemSelectListItem Text="without specification" Value="ohne Angaben"></SemSelectListItem>
+                                        </ListItems>
+                                        <ItemTemplate>
+                                            <span class="text">@(((SemanticBlazor.Models.ListItem)context).Text)</span>
+                                            <span class="description">@(((SemanticBlazor.Models.ListItem)context).Value)</span>
+                                        </ItemTemplate>
+                                    </SemDropdownSelection>
+                                </SemFormField>
+                            </SemGridColumn>
+                            <SemGridColumn Wide="GridUnit.Five" Classes="@(new[] { ColumnClass.Left_Aligned })">
+                                <ValidationMessage For="@(() => ParentForm.UserInfo.AdditionalFamilyMemberDataList[AdditionalFamilyMemberIdx].DateOfBirth)" />
+                                <b>Birthdate</b>
+                                <SemFormField For="@(() => ParentForm.UserInfo.AdditionalFamilyMemberDataList[AdditionalFamilyMemberIdx].DateOfBirth)">
+                                    <SemDateInput @bind-Value="ParentForm.UserInfo.AdditionalFamilyMemberDataList[AdditionalFamilyMemberIdx].DateOfBirth"  Size="InputSize.Large" ></SemDateInput>
+                                </SemFormField>
+                            </SemGridColumn>
+                            <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                            <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                            <SemGridColumn Wide="GridUnit.Five" Classes="@(new[] { ColumnClass.Left_Aligned })">
+                                <ValidationMessage For="@(() => ParentForm.UserInfo.AdditionalFamilyMemberDataList[AdditionalFamilyMemberIdx].AddressOfResidence)" />
+                                <b>Address of residence</b>
+                                <SemFormField For="@(() => ParentForm.UserInfo.AdditionalFamilyMemberDataList[AdditionalFamilyMemberIdx].AddressOfResidence)">
+                                    <SemInput @bind-Value="ParentForm.UserInfo.AdditionalFamilyMemberDataList[AdditionalFamilyMemberIdx].AddressOfResidence" Size="InputSize.Large"></SemInput>
+                                </SemFormField>
+                            </SemGridColumn>
+                            <SemGridColumn Wide="GridUnit.Five" Classes="@(new[] { ColumnClass.Left_Aligned })">
+                                <ValidationMessage For="@(() => ParentForm.UserInfo.AdditionalFamilyMemberDataList[AdditionalFamilyMemberIdx].Nationalities)" />
+                                <b>Other nationalitie(s)</b>
+                                <SemFormField For="@(() => ParentForm.UserInfo.AdditionalFamilyMemberDataList[AdditionalFamilyMemberIdx].Nationalities)" >
+                                    <SemDataDropdownMultiSelection @bind-Value="ParentForm.UserInfo.AdditionalFamilyMemberDataList[AdditionalFamilyMemberIdx].Nationalities" Items="CountriesList" 
+                                        ValueSelector="@(regionInfo => regionInfo.CountryName)" ItemText="@(regionInfo => regionInfo.CountryName)" DefaultText="Select..."  Search="true">
+                                            <ItemTemplate>
+                                                <i class="@(((skillerator.Models.GeonameItem)context).CountryCodeCSSClass)"></i>
+                                                <span class="text">@(((skillerator.Models.GeonameItem)context).CountryName)</span>
+                                            </ItemTemplate>
+                                    </SemDataDropdownMultiSelection>
+                                </SemFormField>
+                            </SemGridColumn>
+                            <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
+                        </SemGrid>
+                    }
+                </Content>
+                <Actions>
+                    <SemButton Class="deny" OnClick="@(() => additionalFamilyMemberModal.Hide())">Cancel</SemButton>
+                    <SemButton Emphasis="Emphasis.Primary" Icon="Icon.Check" OnClick="@(() => additionalFamilyMemberModal.Hide())">Confirm</SemButton>
+                </Actions>
+            </SemModal>
 
-            @foreach(var (item, index) in ParentForm.UserInfo.AdditionalFamilyMemberDataList.WithIndex()){
+            @if(ParentForm.UserInfo.AdditionalFamilyMemberDataList.Any()){
                 <SemGridRow>
                     <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
                     <SemGridColumn Wide="GridUnit.Ten" Classes="@(new[] { ColumnClass.Left_Aligned })">
-                        <ValidationMessage For="@(() => ParentForm.UserInfo.AdditionalFamilyMemberDataList[index].LastName)" />
-                        <b>Surname</b>
-                        <SemFormField For="@(() => ParentForm.UserInfo.AdditionalFamilyMemberDataList[index].LastName)">
-                            <SemInput @bind-Value="ParentForm.UserInfo.AdditionalFamilyMemberDataList[index].LastName"  Size="InputSize.Large" ></SemInput>
-                        </SemFormField>
+                        <p><b>Additional family members</b><br/>
+                        Weiteren Familienangehörigen</p>
                     </SemGridColumn>
                     <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
                 </SemGridRow>
+
                 <SemGridRow>
                     <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
                     <SemGridColumn Wide="GridUnit.Ten" Classes="@(new[] { ColumnClass.Left_Aligned })">
-                        <ValidationMessage For="@(() => ParentForm.UserInfo.AdditionalFamilyMemberDataList[index].FirstName)" />
-                        <b>First name(s)</b>
-                        <SemFormField For="@(() => ParentForm.UserInfo.AdditionalFamilyMemberDataList[index].FirstName)" >
-                            <SemInput @bind-Value="ParentForm.UserInfo.AdditionalFamilyMemberDataList[index].FirstName"  Size="InputSize.Large"></SemInput>
-                        </SemFormField>
-                    </SemGridColumn>
-                    <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
-                </SemGridRow>
-                <SemGridRow>
-                    <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
-                    <SemGridColumn Wide="GridUnit.Nine" Classes="@(new[] { ColumnClass.Left_Aligned })">
-                        <ValidationMessage For="@(() => ParentForm.UserInfo.AdditionalFamilyMemberDataList[index].Gender)" />
-                        <b>Gender</b>
-                        <SemFormField For="@(() => ParentForm.UserInfo.AdditionalFamilyMemberDataList[index].Gender)" >
-                            <SemDropdownSelection @bind-Value="ParentForm.UserInfo.Gender" DefaultText="Select...">
-                                <ListItems>
-                                    <SemSelectListItem Text="male" Value="männlich"></SemSelectListItem>
-                                    <SemSelectListItem Text="female" Value="weiblich"></SemSelectListItem>
-                                    <SemSelectListItem Text="diverse" Value="divers"></SemSelectListItem>
-                                    <SemSelectListItem Text="without specification" Value="ohne Angaben"></SemSelectListItem>
-                                </ListItems>
-                                <ItemTemplate>
-                                    <span class="text">@(((SemanticBlazor.Models.ListItem)context).Text)</span>
-                                    <span class="description">@(((SemanticBlazor.Models.ListItem)context).Value)</span>
-                                </ItemTemplate>
-                            </SemDropdownSelection>
-                        </SemFormField>
-                    </SemGridColumn>
-                    <SemGridColumn Wide="GridUnit.One" Classes="@(new[] { ColumnClass.Left_Aligned})" Style="padding-top: 2.585714em;">
-                        <SemButton OnClick="@(() => RemoveAdditionalFamilyMemberData(index))" Icon="Icon.Trash" Size="Size.Big" ></SemButton>
+                        <SemDataTable ItemType="(Models.AdditionalFamilyMemberData, int)" Items="@ParentForm.UserInfo.AdditionalFamilyMemberDataList.WithIndex().ToList()">
+                            <Header>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Gender</th>
+                                    <th>Date of birth</th>
+                                    <th>Nationalities</th>
+                                    <th>Family relationship</th>
+                                    <th>Address of residence</th>
+                                    <th></th>
+                                </tr>
+                            </Header>
+                            <RowTemplate>
+                                <tr>
+                                    <td>@context.Item1.FirstName</td>
+                                    <td>@context.Item1.LastName</td>
+                                    <td>@context.Item1.Gender</td>
+                                    <td>@context.Item1.DateOfBirth.ToString("dd.MM.yyyy")</td>
+                                    <td>@context.Item1.Nationalities</td>
+                                    <td>@context.Item1.FamilyRelationship</td>
+                                    <td>@context.Item1.AddressOfResidence</td>
+                                    <td>
+                                        <SemButton OnClick="(() => EditAdditionalFamilyMemberData(context.Item2))" Icon="Icon.Edit" Size="Size.Big" ></SemButton>
+                                        <SemButton OnClick="(() => RemoveAdditionalFamilyMemberData(context.Item2))" Icon="Icon.Trash" Size="Size.Big" ></SemButton>
+                                    </td>
+                                </tr>
+                            </RowTemplate>
+                        </SemDataTable>
                     </SemGridColumn>
                     <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
                 </SemGridRow>
             }
-
+            
             <SemGridRow>
                 <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
                 <SemGridColumn Wide="GridUnit.One" Classes="@(new[] { ColumnClass.Left_Aligned })">
                     <SemButton OnClick="@(() => AddAdditionalFamilyMemberData())" Icon="Icon.Plus_Circle" Size="Size.Big"></SemButton>
                 </SemGridColumn>
                 <SemGridColumn Wide="GridUnit.Nine" Classes="@(new[] { ColumnClass.Left_Aligned })">
-                    <p><b>Falls Sie weitere Angaben zu Familienangehörigen machen möchten, fügen Sie bitte ein zusätzliches Blatt hinzufügen</b><br/>
-                    If you wish to provide further information on family members, please insert an additional sheet</p>
+                    <p><b>If you wish to add further family members, please click + to add.</b><br/>
+                    Falls Sie Angaben zu weiteren Familienangehörigen machen möchten, klicken Sie bitte auf hinzufügen mit +.</p>
                 </SemGridColumn>
                 <SemGridColumn Wide="GridUnit.Three" Classes="@(new[] { ColumnClass.Left_Aligned })"></SemGridColumn>
             </SemGridRow>
         </SemGrid>
     </MultiStepsFormCard>
+    
 </MultiStepsForm>

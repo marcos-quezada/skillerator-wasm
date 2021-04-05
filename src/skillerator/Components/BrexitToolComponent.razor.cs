@@ -4,11 +4,15 @@ using System.Globalization;
 using System;
 using System.Linq;
 using skillerator.Models;
+using SemanticBlazor.Components;
 
 namespace skillerator.Components{
     public partial class BrexitToolComponent{
         [CascadingParameter] protected internal MultiStepsForm ParentForm { get; set; }
         [CascadingParameter(Name = "CountriesList")] protected internal List<GeonameItem> CountriesList {get; set;}
+        private SemModal additionalFamilyMemberModal;
+        private int AdditionalFamilyMemberIdx { get; set; }
+        public SemModal AdditionalFamilyMemberModal { get => additionalFamilyMemberModal; set => additionalFamilyMemberModal = value; }
 
         protected internal string[] BritishNationalitiesList = new string[] {"British Citizen", "British National (Overseas)", "British Protected Person", "British Subject (right of abode)",
             "British Subject (without right of abode)", "British Overseas Citizen", "British Overseas Territories Citizen (Gibraltar)", "British Overseas Territories Citizen (not Gibraltar)"};
@@ -43,10 +47,18 @@ namespace skillerator.Components{
 
         protected internal void AddAdditionalFamilyMemberData(){
             ParentForm.UserInfo.AdditionalFamilyMemberDataList.Add(new AdditionalFamilyMemberData());
+            AdditionalFamilyMemberIdx = ParentForm.UserInfo.AdditionalFamilyMemberDataList.Count - 1;
+            additionalFamilyMemberModal.Show();
         }
 
         protected internal void RemoveAdditionalFamilyMemberData(int index){
             ParentForm.UserInfo.AdditionalFamilyMemberDataList.RemoveAt(index);
+            AdditionalFamilyMemberIdx = ParentForm.UserInfo.AdditionalFamilyMemberDataList.Count - 1;
+        }
+
+        protected internal void EditAdditionalFamilyMemberData(int index){
+            AdditionalFamilyMemberIdx = index;
+            additionalFamilyMemberModal.Show();
         }
     }
 }
