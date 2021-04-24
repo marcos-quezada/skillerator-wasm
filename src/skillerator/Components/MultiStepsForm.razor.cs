@@ -96,13 +96,22 @@ namespace skillerator.Components{
         } 
 
         protected internal string CreateVarsLatexString(){
-            return "\\newcommand{\\AuslanderbehoerdeDescription}{" + AuslaenderbehoerdeItem.Amtsbezeichnung + " " + AuslaenderbehoerdeItem.Bezeichnung 
-                + "}\\newcommand{\\AuslanderbehoerdeAddressLineOne}{" + AuslaenderbehoerdeItem.StrasseHsNr + "}\\newcommand{\\AuslanderbehoerdeAddressLineTwo}{"
-                + AuslaenderbehoerdeItem.Plz + " " + AuslaenderbehoerdeItem.Ort + "}\\newcommand{\\Surname}{" + UserInfo.LastName + "}\\newcommand{\\FirstName}{"
-                + UserInfo.FirstName + "}\\newcommand{\\Gender}{" + UserInfo.Gender + "}\\newcommand{\\CurrentAddressLineOne}{" + UserInfo.StreetAddress + " "
-                + UserInfo.Number + "}\\newcommand{\\CurrentAddressLineTwo}{" + UserInfo.ZipCode + " " + UserInfo.City + "}\\setboolean{IsRegistration}{"
-                + UserInfo.IsRegistration + "}\\setboolean{IsApplication}{" + UserInfo.IsCertificate + "}\\newcommand{\\FormerNames}{" + UserInfo.FormerNames
-                + "}\\newcommand{\\Email}{" + UserInfo.Email + "}";
+            return "\\newcommand{\\AuslanderbehoerdeDescription}{" + AuslaenderbehoerdeItem.Amtsbezeichnung + " " + AuslaenderbehoerdeItem.Bezeichnung + "}" +
+                "\\newcommand{\\AuslanderbehoerdeAddressLineOne}{" + AuslaenderbehoerdeItem.StrasseHsNr + "}"+
+                "\\newcommand{\\AuslanderbehoerdeAddressLineTwo}{" + AuslaenderbehoerdeItem.Plz + " " + AuslaenderbehoerdeItem.Ort + "}" +
+                "\\newcommand{\\Surname}{" + UserInfo.LastName + "}" +
+                "\\newcommand{\\FirstName}{" + UserInfo.FirstName + "}" +
+                "\\newcommand{\\Gender}{" + UserInfo.Gender + "}" +
+                "\\newcommand{\\CurrentAddressLineOne}{" + UserInfo.StreetAddress + " " + UserInfo.Number + "}" +
+                "\\newcommand{\\CurrentAddressLineTwo}{" + UserInfo.ZipCode + " " + UserInfo.City + "}" + 
+                "\\setboolean{IsRegistration}{" + UserInfo.IsRegistration + "}" +
+                "\\setboolean{IsApplication}{" + UserInfo.IsCertificate + "}" +
+                "\\newcommand{\\FormerNames}{" + UserInfo.FormerNames + "}" +
+                "\\newcommand{\\Email}{" + UserInfo.Email + "}" +
+                "\\newcommand{\\BirthDate}{" + UserInfo.Birthdate.ToString("dd.MM.yyyy") + "}" +
+                "\\newcommand{\\BirthPlace}{" + UserInfo.BirthPlace + "}" +
+                "\\newcommand{\\BritishNationalityNature}{" + string.Join(',', UserInfo.BritishNationalities) + "}" +
+                "\\newcommand{\\OtherNationalities}{" + string.Join(',', UserInfo.OtherNationalities) + "}";
         }
         protected internal async Task<string> GeneratePDF(){
             await GetAuslanderbehoerdeId();
