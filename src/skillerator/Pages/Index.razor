@@ -1,13 +1,26 @@
 ﻿@page "/"
 
-<SemGrid Columns="GridUnit.One" Classes="@(new [] {GridClass.Centered})">
-  <SemGridColumn Classes="@(new[] { ColumnClass.Center_Aligned })">
-      <img src="logo_skillerator_bildmarke.svg" class="responsive"/>
-  </SemGridColumn>
-  <SemGridColumn Classes="@(new[] { ColumnClass.Center_Aligned })">
-      <SemDivider></SemDivider>
-  </SemGridColumn>
-  <SemGridColumn Classes="@(new[] { ColumnClass.Center_Aligned })">
-      <h2>Coming Soon</h2>
-  </SemGridColumn>
-</SemGrid>
+<div class="content px-4 landing">
+    <SemGrid class="landing">
+        <SemGridColumn Wide="GridUnit.Sixteen" Classes="@(new[] { ColumnClass.Center_Aligned })">
+            <img src="logo_skillerator_pfade_weiss.png" class="responsive logo"/>
+        </SemGridColumn>
+        <SemGridColumn Wide="GridUnit.Three"></SemGridColumn>
+        <SemGridColumn Wide="GridUnit.Ten" Classes="@(new[] { ColumnClass.Center_Aligned })">
+            <h1 class="white-title">Coming Soon</h1>
+        </SemGridColumn>
+        <SemGridColumn Wide="GridUnit.Three"></SemGridColumn>
+        <SemGridColumn Wide="GridUnit.Four"></SemGridColumn>
+        <SemGridColumn Wide="GridUnit.Eight">
+            <hr class="solid"/>
+        </SemGridColumn>
+        <SemGridColumn Wide="GridUnit.Four"></SemGridColumn>
+        <SemGridColumn Wide="GridUnit.Four"></SemGridColumn>
+        <SemGridColumn Wide="GridUnit.Eight" Classes="@(new[] { ColumnClass.Center_Aligned })">
+            <h2 class="white-title">
+                We bring your employee to Germany: Easy, transparent and compliant
+            </h2>
+        </SemGridColumn>
+        <SemGridColumn Wide="GridUnit.Four"></SemGridColumn>
+    </SemGrid>
+</div>

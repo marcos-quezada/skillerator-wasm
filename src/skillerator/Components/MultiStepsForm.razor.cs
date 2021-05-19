@@ -110,8 +110,9 @@ namespace skillerator.Components{
                 "\\newcommand{\\Email}{" + UserInfo.Email + "}" +
                 "\\newcommand{\\BirthDate}{" + UserInfo.Birthdate.ToString("dd.MM.yyyy") + "}" +
                 "\\newcommand{\\BirthPlace}{" + UserInfo.BirthPlace + "}" +
-                "\\newcommand{\\BritishNationalityNature}{" + string.Join(',', UserInfo.BritishNationalities) + "}" +
-                "\\newcommand{\\OtherNationalities}{" + string.Join(',', UserInfo.OtherNationalities) + "}";
+                "\\newcommand{\\BritishNationalityNature}{" + string.Join(", ", UserInfo.BritishNationalities) + "}" +
+                "\\newcommand{\\OtherNationalities}{" + string.Join(", ", UserInfo.OtherNationalities) + "}" +
+                "\\Newcommand{\\MaritalStatus}{" + UserInfo.MaritalStatus + "}";
         }
         protected internal async Task<string> GeneratePDF(){
             await GetAuslanderbehoerdeId();

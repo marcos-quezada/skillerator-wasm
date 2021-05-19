@@ -55,3 +55,8 @@ a, .btn-link {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.landing{
+    background: rgb(0,159,227);
+    background: linear-gradient(90deg, rgba(0,159,227,1) 35%, rgba(40,53,131,1) 100%);
+}
