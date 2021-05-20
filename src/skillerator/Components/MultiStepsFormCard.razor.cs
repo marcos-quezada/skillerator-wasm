@@ -10,10 +10,9 @@ namespace skillerator.Components{
 
         [Parameter] public string ValidationGroup{get; set;}
 
-      
         protected override void OnInitialized()
         {
             Parent.AddStep(this);
-        }   
+        }
     }
 }

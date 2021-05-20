@@ -42,7 +42,7 @@ namespace skillerator.Components{
         [CascadingParameter(Name="AuslaenderbehoerdeDictionary")] protected internal Dictionary<long, AuslaenderbehoerdeData> AuslaenderbehoerdeDictionary{get; set;}
         public FluentValidationValidator FluentValidationValidator { get => fluentValidationValidator; set => fluentValidationValidator = value; }
 
-        bool PartialValidate(string RuleSetsName)
+        private bool PartialValidate(string RuleSetsName)
         {
             Console.WriteLine($"userInfo is elegible value : {UserInfo.IsElegible}");
             Console.WriteLine($"Rules Set Name : {RuleSetsName}");
@@ -62,38 +62,38 @@ namespace skillerator.Components{
         {
             //fluentValidationValidator.Validate(options => options.IncludeRuleSets(Cards[ActiveStepIx].ValidationGroup))
             if (ActiveStepIx < Cards.Count - 1 && PartialValidate(Cards[ActiveStepIx].ValidationGroup))
-                SetActive(Cards[(Cards.IndexOf(ActiveStep) + 1)]);
+                SetActive(Cards[Cards.IndexOf(ActiveStep) + 1]);
         }
 
-        async Task SubmitValidForm()
-        {   
-            await SendEmail();
+        private async Task SubmitValidForm()
+        {
+            await SendEmail().ConfigureAwait(false);
             Console.WriteLine("Form Submitted Successfully!");
-            NavigationManager.NavigateTo($"/brexit/sucess");
+            NavigationManager.NavigateTo("/brexit/sucess");
         }
 
         protected internal async Task SendEmail(){
-            string PDFCreationResult = await GeneratePDF();
-            
+            string PDFCreationResult = await GeneratePDF().ConfigureAwait(false);
+
             JsonDocument PDFCreationResultJsonDocument = JsonDocument.Parse(PDFCreationResult);
             JsonElement Root = PDFCreationResultJsonDocument.RootElement;
             Root.TryGetProperty("compile", out JsonElement CompileElement);
             CompileElement.TryGetProperty("outputFiles", out JsonElement OuputFilesArray);
             OuputFilesArray.EnumerateArray().FirstOrDefault().TryGetProperty("build", out JsonElement BuildElement);
-            
+
             string DownloadLink = string.Format(DOWNLOAD_LINK_TEMPLATE, UserInfo.ProjectUUID, BuildElement.GetString());
 
-            string MainEmailTemplate = await Http.GetStringAsync("templates/brexit_email_template.html");
+            string MainEmailTemplate = await Http.GetStringAsync("templates/brexit_email_template.html").ConfigureAwait(false);
             EmailContentData EmailData = new(UserInfo.Email, "Document generated", string.Format(MainEmailTemplate, DownloadLink, DownloadLink));
 
             var json = JsonSerializer.Serialize(EmailData);
-            var data = new StringContent(json, Encoding.UTF8, "application/json");   
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await Http.PostAsync(EMAIL_SERVICE_ENDPOINT, data);
+            var response = await Http.PostAsync(EMAIL_SERVICE_ENDPOINT, data).ConfigureAwait(false);
 
             string result = response.Content.ReadAsStringAsync().Result;
             Console.WriteLine(result);
-        } 
+        }
 
         protected internal string CreateVarsLatexString(){
             return "\\newcommand{\\AuslanderbehoerdeDescription}{" + AuslaenderbehoerdeItem.Amtsbezeichnung + " " + AuslaenderbehoerdeItem.Bezeichnung + "}" +
@@ -103,7 +103,7 @@ namespace skillerator.Components{
                 "\\newcommand{\\FirstName}{" + UserInfo.FirstName + "}" +
                 "\\newcommand{\\Gender}{" + UserInfo.Gender + "}" +
                 "\\newcommand{\\CurrentAddressLineOne}{" + UserInfo.StreetAddress + " " + UserInfo.Number + "}" +
-                "\\newcommand{\\CurrentAddressLineTwo}{" + UserInfo.ZipCode + " " + UserInfo.City + "}" + 
+                "\\newcommand{\\CurrentAddressLineTwo}{" + UserInfo.ZipCode + " " + UserInfo.City + "}" +
                 "\\setboolean{IsRegistration}{" + UserInfo.IsRegistration + "}" +
                 "\\setboolean{IsApplication}{" + UserInfo.IsCertificate + "}" +
                 "\\newcommand{\\FormerNames}{" + UserInfo.FormerNames + "}" +
@@ -115,8 +115,8 @@ namespace skillerator.Components{
                 "\\Newcommand{\\MaritalStatus}{" + UserInfo.MaritalStatus + "}";
         }
         protected internal async Task<string> GeneratePDF(){
-            await GetAuslanderbehoerdeId();
-            string MainLatexTemplate = await Http.GetStringAsync("templates/brexit_template.tex");
+            await GetAuslanderbehoerdeId().ConfigureAwait(false);
+            string MainLatexTemplate = await Http.GetStringAsync("templates/brexit_template.tex").ConfigureAwait(false);
             Resource[] resources = new Resource[]{
                 new Resource("vars.tex", CreateVarsLatexString()),
                 new Resource("main.tex", MainLatexTemplate)
@@ -129,8 +129,8 @@ namespace skillerator.Components{
             var data = new StringContent(json, Encoding.UTF8, "application/json");
 
             var url = $"https://api.skillerator.de/project/{UserInfo.ProjectUUID}/compile";
-            
-            var response = await Http.PostAsync(url, data);
+
+            var response = await Http.PostAsync(url, data).ConfigureAwait(false);
 
             string result = response.Content.ReadAsStringAsync().Result;
             Console.WriteLine(result);
@@ -139,7 +139,7 @@ namespace skillerator.Components{
 
         protected internal async Task<string> GetAuslanderbehoerdeId(){
             UriBuilder builder = new(BEHOERDEN_SERVICE_ENDPOINT);
-            string AmtlicherGemeindeSchluessel = await GetAmtlicherGemeindeSchluessel();
+            string AmtlicherGemeindeSchluessel = await GetAmtlicherGemeindeSchluessel().ConfigureAwait(false);
             Console.WriteLine($"Amtlicher Gemeinde Schlüssel : {AmtlicherGemeindeSchluessel}");
             builder.Query = $"ags={AmtlicherGemeindeSchluessel}&isVwe=0";
 
@@ -150,10 +150,10 @@ namespace skillerator.Components{
 
             Console.WriteLine($"Auslanderbehoerde Message Request : {builder.Uri}");
 
-            var response = await Http.SendAsync(requestMessage);
+            var response = await Http.SendAsync(requestMessage).ConfigureAwait(false);
             _ = response.StatusCode;
 
-            var result = await response.Content.ReadAsStringAsync();
+            var result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
             JsonDocument BehoerdeIdDocument = JsonDocument.Parse(result);
             Console.WriteLine($"JsonDocument : {BehoerdeIdDocument}");
@@ -163,28 +163,27 @@ namespace skillerator.Components{
             Console.WriteLine($"First Nested Array Element : {Root.EnumerateArray().FirstOrDefault().EnumerateArray().FirstOrDefault()}");
             string BehoerdeId = Root.EnumerateArray().FirstOrDefault().EnumerateArray().FirstOrDefault().ToString();
             Console.WriteLine($"BehoerdeId : {BehoerdeId}");
-            AuslaenderbehoerdeItem = AuslaenderbehoerdeDictionary.GetValueOrDefault(Int64.Parse(BehoerdeId));            
+            AuslaenderbehoerdeItem = AuslaenderbehoerdeDictionary.GetValueOrDefault(Int64.Parse(BehoerdeId));
             Console.WriteLine($"Auslanderbehörde address : {AuslaenderbehoerdeItem.StrasseHsNr}");
 
             return BehoerdeId;
-
         }
         protected internal async Task<string> GetAmtlicherGemeindeSchluessel(){
             UriBuilder builder = new(GEO_DATA_SERVICE_ENDPOINT);
             string DecodedQuery = $"[out:json];area[\"ISO3166-1\"=\"DE\"][admin_level=2];node[\"openGeoDB:community_identification_number\"][\"name\"=\"{UserInfo.City}\"](area);out;";
             string EncodedQuery = System.Web.HttpUtility.UrlEncode(DecodedQuery);
-            
+
             builder.Query = $"data={EncodedQuery}";
- 
+
             var requestMessage = new HttpRequestMessage() {
                 Method = new HttpMethod("GET"),
                 RequestUri = builder.Uri
             };
 
-            var response = await Http.SendAsync(requestMessage);
+            var response = await Http.SendAsync(requestMessage).ConfigureAwait(false);
             _ = response.StatusCode;
 
-            var result =  await response.Content.ReadAsStringAsync();
+            var result =  await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
             JsonDocument OpenStreetMapDocument = JsonDocument.Parse(result);
 
@@ -194,20 +193,14 @@ namespace skillerator.Components{
             MatchedElement.TryGetProperty("tags", out JsonElement TagsElement);
             TagsElement.TryGetProperty("openGeoDB:community_identification_number", out JsonElement AmtlicherGemeindeSchluesselElement);
             return AmtlicherGemeindeSchluesselElement.GetString();
-
         }
-
-
 
         protected internal void SetActive(MultiStepsFormCard card)
         {
             ActiveStep = card ?? throw new ArgumentNullException(nameof(card));
 
             ActiveStepIx = StepsIndex(card);
-            if (ActiveStepIx == Cards.Count - 1)
-                IsLastStep = true;
-            else
-                IsLastStep = false;
+            IsLastStep = ActiveStepIx == Cards.Count - 1;
         }
 
         public int StepsIndex(MultiStepsFormCard card) => StepsIndexInternal(card);
@@ -218,7 +211,7 @@ namespace skillerator.Components{
 
             return Cards.IndexOf(card);
         }
-        
+
         protected internal void AddStep(MultiStepsFormCard card)
         {
             Cards.Add(card);
@@ -232,8 +225,5 @@ namespace skillerator.Components{
                 StateHasChanged();
             }
         }
-
     }
-
-    
 }

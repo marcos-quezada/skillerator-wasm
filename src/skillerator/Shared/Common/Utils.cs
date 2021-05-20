@@ -124,8 +124,7 @@ namespace skillerator.Shared
         internal static string AddClass(string prevClass, string className)
         {
             var finalClass = string.IsNullOrEmpty(prevClass) ? string.Empty : prevClass.Trim();
-            finalClass = finalClass.Contains(className) ? finalClass : finalClass + Utils.SPACE + className;
-            return finalClass;
+            return finalClass.Contains(className) ? finalClass : finalClass + Utils.SPACE + className;
         }
 
         /// <summary>
@@ -137,8 +136,7 @@ namespace skillerator.Shared
         public static string RemoveClass(string prevClass, string className)
         {
             var finalClass = string.IsNullOrEmpty(prevClass) ? string.Empty : prevClass.Trim();
-            finalClass = finalClass.Contains(className) ? prevClass.Replace(className, string.Empty) : finalClass;
-            return finalClass;
+            return finalClass.Contains(className) ? prevClass.Replace(className, string.Empty) : finalClass;
         }
 
         public static bool IsHomePage(NavigationManager uriHelper)
@@ -176,7 +174,7 @@ namespace skillerator.Shared
             return themeName;
         }
 
-        private static List<DropDownData> themeData = new()
+        public static List<DropDownData> ThemeData { get; set; } = new()
         {
             new DropDownData { ID = "material", Text = "Material" },
             new DropDownData { ID = "fabric", Text = "Fabric" },
@@ -184,8 +182,6 @@ namespace skillerator.Shared
             new DropDownData { ID = "bootstrap4", Text = "Bootstrap v4" },
             new DropDownData { ID = "highcontrast", Text = "High Contrast" }
         };
-
-        public static List<DropDownData> ThemeData { get => themeData; set => themeData = value; }
     }
 
     /// <summary>
@@ -273,7 +269,7 @@ namespace skillerator.Shared
     /// Specifies the position of the SideBar component.
     /// </summary>
     public enum SidebarPlacement
-    {   
+    {
         /// <summary>
         /// Renders the sidebar at left side.
         /// </summary>

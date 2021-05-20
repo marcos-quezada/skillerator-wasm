@@ -33,11 +33,11 @@ namespace skillerator.Pages{
             requestMessage.Headers.Add("Connection", "keep-alive");
             requestMessage.Headers.Add("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.34 (KHTML, like Gecko) Qt/4.8.2");
 
-            var response = await Http.SendAsync(requestMessage);
+            var response = await Http.SendAsync(requestMessage).ConfigureAwait(false);
             _ = response.StatusCode;
 
-            AuslaenderbehoerdeData[] AuslaenderbehoerdeList = await response.Content.ReadFromJsonAsync<AuslaenderbehoerdeData[]>();
-             
+            AuslaenderbehoerdeData[] AuslaenderbehoerdeList = await response.Content.ReadFromJsonAsync<AuslaenderbehoerdeData[]>().ConfigureAwait(false);
+
             foreach(var item in AuslaenderbehoerdeList){
                 if(!AuslaenderbehoerdeDictionary.ContainsKey(item.Id))
                     AuslaenderbehoerdeDictionary.Add(item.Id, item);
@@ -46,7 +46,7 @@ namespace skillerator.Pages{
 
         protected internal async Task RetrieveCountriesList(){
             UriBuilder builder = new(GEONAMES_SERVICE_ENDPOINT);
-            
+
             var requestMessage = new HttpRequestMessage() {
                 Method = new HttpMethod("GET"),
                 RequestUri = builder.Uri
@@ -56,17 +56,17 @@ namespace skillerator.Pages{
             requestMessage.Headers.Add("Connection", "keep-alive");
             requestMessage.Headers.Add("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.34 (KHTML, like Gecko) Qt/4.8.2");
 
-            var response = await Http.SendAsync(requestMessage);
+            var response = await Http.SendAsync(requestMessage).ConfigureAwait(false);
             _ = response.StatusCode;
 
-            GeonamesData geonames = await response.Content.ReadFromJsonAsync<GeonamesData>();
+            GeonamesData geonames = await response.Content.ReadFromJsonAsync<GeonamesData>().ConfigureAwait(false);
             CountriesList = geonames.Geonames;
         }
 
         protected override async Task OnInitializedAsync()
         {
-            await RetrieveABHData();
-            await RetrieveCountriesList();
+            await RetrieveABHData().ConfigureAwait(false);
+            await RetrieveCountriesList().ConfigureAwait(false);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace skillerator.Shared
     public class BaseComponent: ComponentBase
     {
         [Inject] protected SkilleratorAppService Service { get; set; }
-        
+
         protected  override void OnAfterRender(bool firstRender)
         {
             base.OnAfterRender(firstRender);

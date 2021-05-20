@@ -15,7 +15,7 @@ namespace skillerator.Models{
         public Options Options {get; set;}
 
         [JsonPropertyName("resources")]
-        public Resource[] Resources {get; set;} 
+        public Resource[] Resources {get; set;}
 
         public CompileElement(Options options, Resource[] resources){
             this.Options = options;
@@ -26,7 +26,7 @@ namespace skillerator.Models{
     public class Options{
         [JsonPropertyName("compiler")]
         public string Compiler {get; set;}
-        
+
         [JsonPropertyName("timeout")]
         public int Timeout {get; set;}
 
@@ -34,13 +34,12 @@ namespace skillerator.Models{
             this.Compiler = compiler;
             this.Timeout = timeout;
         }
-        
     }
 
     public class Resource{
         [JsonPropertyName("path")]
         public string Path {get; set;}
-        
+
         [JsonPropertyName("content")]
         public string Content {get; set;}
 
@@ -49,5 +48,4 @@ namespace skillerator.Models{
             this.Content = content;
         }
     }
-
 }

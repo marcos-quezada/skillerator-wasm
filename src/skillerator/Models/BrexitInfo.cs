@@ -5,23 +5,13 @@ using System;
 
 namespace skillerator.Models{
     public class BrexitInfo{
-        
         [Display(Name = "Lebten Sie am 31.12.2020 in Deutschland?")] public bool IsElegible{get;set;}
-
-        private bool _isRegistration;
-        [Display(Name = "Aufenthaltsanzeige von britischen Staatsangehörigen")] public bool IsRegistration{
-            get{
-                return _isRegistration;
-            }
-            set{
-                _isRegistration = value;
-            }
-        }
+        [Display(Name = "Aufenthaltsanzeige von britischen Staatsangehörigen")] public bool IsRegistration { get; set; }
         [Display(Name = "Antrag für eine Fiktionsbescheinigung für britische Staatsangehörige")] public bool IsCertificate {
             get{
-                return !_isRegistration;
+                return !IsRegistration;
             } set{
-                _isRegistration = !value;
+                IsRegistration = !value;
             }
         }
 
@@ -42,14 +32,13 @@ namespace skillerator.Models{
 
         [Display(Name = "Geburtsort")] public string BirthPlace {get; set;}
         [Display(Name = "Britische Staatsangehörigkeiten")] public List<string> BritishNationalities {get; set;}
-        [Display(Name = "Weitere Staatsangehörigkeiten")] public List<string> OtherNationalities{get; set;} 
-        [Display(Name = "Wohnadresse")] public string StreetAddress{get; set;} 
-        [Display(Name = "Hausnummer")] public string Number{get; set;} 
-        [Display(Name = "PLZ")] public int ZipCode{get; set;} 
+        [Display(Name = "Weitere Staatsangehörigkeiten")] public List<string> OtherNationalities{get; set;}
+        [Display(Name = "Wohnadresse")] public string StreetAddress{get; set;}
+        [Display(Name = "Hausnummer")] public string Number{get; set;}
+        [Display(Name = "PLZ")] public int ZipCode{get; set;}
         [Display(Name = "Stadt")] public string City{get; set;}
         [Display(Name = "E-Mail Adresse")] public string Email{get; set;}
         protected internal string ProjectUUID = Guid.NewGuid().ToString();
-
     }
 
     public class BrexitInfoValidator : AbstractValidator<BrexitInfo>{
