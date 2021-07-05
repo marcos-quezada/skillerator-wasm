@@ -1,0 +1,275 @@
+/* /Pages/Index.razor.rz.scp.css */
+.responsive[b-oobxip2fxt] {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+  }
+
+.logo[b-oobxip2fxt]{
+  opacity: 0.4;
+}
+
+h1.white-title[b-oobxip2fxt]{
+  text-align: center;
+  text-transform: uppercase;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 4.5em;
+  color: floralwhite;
+}
+
+h2.white-title[b-oobxip2fxt]{
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2em;
+  color: floralwhite;
+}
+
+p.white-text[b-oobxip2fxt]{
+  text-align: left;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 1em;
+  color: floralwhite;
+}
+
+hr.solid[b-oobxip2fxt] {
+  border-top: 6px solid floralwhite;
+}
+
+div.iframe-container[b-oobxip2fxt] {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+}
+
+/* Then style the iframe to fit in the container div with full height and width */
+iframe.responsive-iframe[b-oobxip2fxt] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.background[b-oobxip2fxt] {
+  margin: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  overflow: hidden;
+  will-change: transform;
+  backface-visibility: hidden;
+  height: 130vh;
+  position: fixed;
+  width: 100%;
+  transform: translateY(30vh);
+  transition: all 1.2s cubic-bezier(0.22, 0.44, 0, 1);
+}
+.background[b-oobxip2fxt]:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgb(0,159,227);
+  background: linear-gradient(90deg, rgba(0,159,227,1) 35%, rgba(40,53,131,1) 100%);
+}
+.background:first-child[b-oobxip2fxt] {
+  transform: translateY(-15vh);
+}
+.background:first-child .content-wrapper[b-oobxip2fxt] {
+  transform: translateY(15vh);
+}
+/* Set stacking context of slides */
+.background:nth-child(1)[b-oobxip2fxt] {
+  z-index: 3;
+}
+.background:nth-child(2)[b-oobxip2fxt] {
+  z-index: 2;
+}
+.background:nth-child(3)[b-oobxip2fxt] {
+  z-index: 1;
+}
+.content-wrapper[b-oobxip2fxt] {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-flow: column nowrap;
+  color: #fff;
+  font-family: Montserrat;
+  text-transform: uppercase;
+  transform: translateY(40vh);
+  will-change: transform;
+  backface-visibility: hidden;
+  transition: all 1.7s cubic-bezier(0.22, 0.44, 0, 1);
+}
+.content-title[b-oobxip2fxt] {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 1em;
+  color: floralwhite;
+  line-height: 1.4;
+}
+.background.up-scroll[b-oobxip2fxt] {
+  transform: translate3d(0, -15vh, 0);
+}
+.background.up-scroll .content-wrapper[b-oobxip2fxt] {
+  transform: translateY(15vh);
+}
+.background.up-scroll + .background[b-oobxip2fxt] {
+  transform: translate3d(0, 30vh, 0);
+}
+.background.up-scroll + .background .content-wrapper[b-oobxip2fxt] {
+  transform: translateY(30vh);
+}
+.background.down-scroll[b-oobxip2fxt] {
+  transform: translate3d(0, -130vh, 0);
+}
+.background.down-scroll .content-wrapper[b-oobxip2fxt] {
+  transform: translateY(40vh);
+}
+.background.down-scroll + .background:not(.down-scroll)[b-oobxip2fxt] {
+  transform: translate3d(0, -15vh, 0);
+}
+.background.down-scroll + .background:not(.down-scroll) .content-wrapper[b-oobxip2fxt] {
+  transform: translateY(15vh);
+}
+/* /Shared/MainLayout.razor.rz.scp.css */
+.page[b-ao9cax2vrf] {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.main[b-ao9cax2vrf] {
+    flex: 1;
+}
+
+.sidebar[b-ao9cax2vrf] {
+    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+}
+
+.top-row[b-ao9cax2vrf] {
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #d6d5d5;
+    justify-content: flex-end;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+}
+
+    .top-row[b-ao9cax2vrf]  a, .top-row .btn-link[b-ao9cax2vrf] {
+        white-space: nowrap;
+        margin-left: 1.5rem;
+    }
+
+    .top-row a:first-child[b-ao9cax2vrf] {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+@media (max-width: 640.98px) {
+    .top-row:not(.auth)[b-ao9cax2vrf] {
+        display: none;
+    }
+
+    .top-row.auth[b-ao9cax2vrf] {
+        justify-content: space-between;
+    }
+
+    .top-row a[b-ao9cax2vrf], .top-row .btn-link[b-ao9cax2vrf] {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 641px) {
+    .page[b-ao9cax2vrf] {
+        flex-direction: row;
+    }
+
+    .sidebar[b-ao9cax2vrf] {
+        width: 250px;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+    }
+
+    .top-row[b-ao9cax2vrf] {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .main > div[b-ao9cax2vrf] {
+        padding-left: 2rem !important;
+        padding-right: 1.5rem !important;
+    }
+}
+/* /Shared/NavMenu.razor.rz.scp.css */
+.navbar-toggler[b-t9pus8ftce] {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.top-row[b-t9pus8ftce] {
+    height: 3.5rem;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.navbar-brand[b-t9pus8ftce] {
+    font-size: 1.1rem;
+}
+
+.oi[b-t9pus8ftce] {
+    width: 2rem;
+    font-size: 1.1rem;
+    vertical-align: text-top;
+    top: -2px;
+}
+
+.nav-item[b-t9pus8ftce] {
+    font-size: 0.9rem;
+    padding-bottom: 0.5rem;
+}
+
+    .nav-item:first-of-type[b-t9pus8ftce] {
+        padding-top: 1rem;
+    }
+
+    .nav-item:last-of-type[b-t9pus8ftce] {
+        padding-bottom: 1rem;
+    }
+
+    .nav-item[b-t9pus8ftce]  a {
+        color: #d7d7d7;
+        border-radius: 4px;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        line-height: 3rem;
+    }
+
+.nav-item[b-t9pus8ftce]  a.active {
+    background-color: rgba(255,255,255,0.25);
+    color: white;
+}
+
+.nav-item[b-t9pus8ftce]  a:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+}
+
+@media (min-width: 641px) {
+    .navbar-toggler[b-t9pus8ftce] {
+        display: none;
+    }
+
+    .collapse[b-t9pus8ftce] {
+        /* Never collapse the sidebar for wide screens */
+        display: block;
+    }
+}

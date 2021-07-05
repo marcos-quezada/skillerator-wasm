@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>skillerator</title>
+    <base href="/" />
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/app.css" rel="stylesheet" />
+    <link href="skillerator.styles.css" rel="stylesheet" />
+    <link href="manifest.json" rel="manifest" />
+    <link rel="icon" href="logo_skillerator_bildmarke.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
+    <script src="_content/SemanticBlazor/modules/jquery/jquery.min.js"></script>
+    <script src="_content/SemanticBlazor/modules/semantic/semantic.min.js"></script>
+    <link href="_content/SemanticBlazor/modules/semantic/semantic.min.css" rel="stylesheet" />
+    <script src="_content/SemanticBlazor/modules/semantic/calendar.min.js"></script>
+    <link href="_content/SemanticBlazor/modules/semantic/calendar.min.css" rel="stylesheet" />
+    <link href="_content/SemanticBlazor/SemanticBlazor.css" rel="stylesheet" />
+    <script src="_content/SemanticBlazor/SemanticBlazor.js"></script>
+    <link href="css/spinner/base.css" rel="stylesheet" />
+    <link href="css/spinner/style.css" rel="stylesheet" />
+    <link href="scss/index-scroll.scss" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+    <script src="js/index-scroll.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8 center-element">
+                    <p></p>
+                    <br />
+                    <div class="loading-wrapper">
+                        <div class="loading-pouring">
+                        </div>
+                    </div>
+                    <div class="loading-name">
+                        <p>Loading Skillerator App...</p>
+                    </div>
+                </div>
+                <div class="col-2"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="_framework/blazor.webassembly.js"></script>
+    <script>navigator.serviceWorker.register('service-worker.js');</script>
+</body>
+
+</html>

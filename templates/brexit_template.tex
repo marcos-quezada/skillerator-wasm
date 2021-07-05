@@ -1,0 +1,144 @@
+\documentclass[a4paper]{article}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage[export]{adjustbox}
+\usepackage{ifthen}
+\usepackage{pifont}
+\usepackage{amssymb}
+\usepackage{tabularx}
+\RequirePackage[
+left=5mm,
+right=15mm,
+top=5mm,
+bottom=5mm,
+nohead,
+nofoot]{geometry}
+\pagestyle{empty}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PREAMBLE.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Info placeholders.
+\newcommand{\Height}{190}
+\newcommand{\EyeColour}{grey}
+\newcommand{\AdditionalAddressLineOne}{Traumstraße 789}
+\newcommand{\AdditionalAddressLineTwo}{10111 Traumland}
+\newcommand{\InGermanySince}{01.01.2000}
+\newcommand{\OusideGermanyMoreSixMonthsFrom}{01.01.1990}
+\newcommand{\OusideGermanyMoreSixMonthsUntil}{01.07.1990}
+\newcommand{\OusideGermanyMoreSixMonthsCountry}{UK}
+\newcommand{\TelephoneNumber}{01894819340}
+
+% Check placeholders
+\newboolean{IsRegistration}
+\newboolean{IsApplication}
+
+% Gender Checks
+\newboolean{IsMale}
+\newboolean{IsDiverse}
+\newboolean{IsFemale}
+\newboolean{NotSpecified}
+
+% Nationality checks
+\newboolean{IsCitizen}
+\newboolean{IsNational}
+\newboolean{IsProtectedPerson}
+\newboolean{IsSubject}
+\newboolean{IsSubjectWithoutRight}
+\newboolean{IsOverseasCitizen}
+\newboolean{IsOverseasTerritoriesCitizen}
+\newboolean{NotGibraltarOverseasTerritoriesCitizen}
+\newboolean{IsGerman}
+
+% Marital Status Checks
+\newboolean{IsSingle}
+\newboolean{IsMarried}
+\newboolean{IsSeparated}
+\newboolean{IsOnDivorceProcess}
+\newboolean{IsWidowed}
+\newboolean{IsDivorced}
+
+% Purpouse Checks
+\newboolean{IsLookingForJob}
+\newboolean{IsEmployee}
+\newboolean{IsSelfEmployed}
+\newboolean{IsUnemployed}
+\newboolean{IsEntitledToPermanentResidence}
+\newboolean{IsFrontierWorker}
+\newboolean{IsPostedWorker}
+\newboolean{IsGettingSocialHelp}
+\newboolean{HasPermanentResidenceDocument}
+\newboolean{NotPermanentResidenceDocument}
+
+\include{vars}
+
+\begin{document}
+    \begin{tabularx}{\textwidth}{@{\extracolsep{\fill}}XX}
+        eingegangen bei der Behörde am: \hrulefill & 
+            \textbf{\AuslanderbehoerdeDescription} \\
+        entgegengenommen von: \hrulefill
+            \newline
+            (Namensstempel und Handzeichen) &    
+            \textbf{\AuslanderbehoerdeAddressLineOne}
+            \newline 
+            \textbf{\AuslanderbehoerdeAddressLineTwo} \\
+    \end{tabularx}
+    \vspace{1cm}
+    
+    \textbf{Freizügigkeitsrecht
+    nach dem Austrittsabkommen Vereinigtes Königreich – Europäische Union}
+    \newline
+    Right of Free Movement according to the Withdrawal Agreement United Kingdom – European Union
+
+    \vspace{1cm}
+
+    \begin{itemize}
+        \ifthenelse{\boolean{IsRegistration}}{\item[\rlap{\raisebox{0.3ex}{\hspace{0.4ex}\scriptsize \ding{56}}}$\square$]}{\item[$\square$]}
+        \textbf{Aufenthaltsanzeige von britischen Staatsangehörigen}
+        \newline
+        Registration of UK citizens at the Munich Foreigners Office 
+    \end{itemize} 
+    \begin{itemize}
+        \ifthenelse{\boolean{IsApplication}}{\item[\rlap{\raisebox{0.3ex}{\hspace{0.4ex}\scriptsize \ding{56}}}$\square$]}{\item[$\square$]}
+        \textbf{Antrag für eine Fiktionsbescheinigung für britische Staatsangehörige}
+        \newline
+        Application for a fictional certificate for UK citizens
+    \end{itemize}
+    \vspace{1cm}
+
+    \renewcommand{\arraystretch}{3}
+
+    \begin{tabularx}{\textwidth}{@{\extracolsep{\fill}}XX}
+        \multicolumn{2}{l}{\textbf{1. Persönliche Angaben } Personal data} \\
+        \hline
+        \textbf{Familienname} 
+        \newline
+        Surname & \Surname \\
+        \textbf{Frühere Namen (Geburts- odernfrüherer Ehename)}
+        \newline
+        Former names (maiden name, former married name) & \FormerNames\\
+        \textbf{Vorname(n)}
+        \newline
+        First name(s) & \FirstName \\
+        \textbf{Geschlecht}
+        \newline
+        Gender & \Gender \\
+        \textbf{Geburtsdatum}
+        \newline
+        Date of birth & \BirthDate \\
+        \textbf{Geburtsort}
+        \newline
+        Place of birth & \BirthPlace \\
+        \textbf{Britische Staatsangehörigkeit(en)}
+        \newline
+        British nationality(ies) & \BritishNationalityNature \\
+        \textbf{Weitere Staatsangehörigkeit(en)}
+        \newline
+        Other nationality(ies) & \OtherNationalities
+        \newline
+        Marital Status & \MaritalStatus
+
+    \end{tabularx}
+    
+\end{document}
